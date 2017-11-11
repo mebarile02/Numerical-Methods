@@ -1,0 +1,702 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     26455,        694]
+NotebookOptionsPosition[     25254,        647]
+NotebookOutlinePosition[     25611,        663]
+CellTagsIndexPosition[     25568,        660]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "Michael", " ", "Barile", " ", "\[IndentingNewLine]", "MATH", " ", 
+     "68500", "\[IndentingNewLine]", "November", " ", "13"}], ",", " ", 
+    "2017"}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", "5.1", " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Problem", " ", "1", "a"}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "[", "x_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"x", "*", 
+       RowBox[{"Exp", "[", 
+        RowBox[{"-", "x"}], "]"}]}], "-", "1"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"f", "[", "x", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "1", ",", "4"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Integration", " ", "by", " ", "parts"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ansnum", " ", "=", 
+     RowBox[{"N", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "4"}], "*", 
+           RowBox[{"Exp", "[", 
+            RowBox[{"-", "4"}], "]"}]}], "-", 
+          RowBox[{"Exp", "[", 
+           RowBox[{"-", "4"}], "]"}], "-", "4"}], ")"}], "-", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "1"}], "*", 
+           RowBox[{"Exp", "[", 
+            RowBox[{"-", "1"}], "]"}]}], "-", 
+          RowBox[{"Exp", "[", 
+           RowBox[{"-", "1"}], "]"}], "-", "1"}], ")"}]}], ",", "6"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<With integration by parts, the integral evaluates to \>\"", ",", 
+     "ansnum"}], "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.719302338831126*^9, 3.7193023648698473`*^9}, {
+  3.719302399063051*^9, 3.7193024063827753`*^9}, {3.71930243858707*^9, 
+  3.719302519950307*^9}, {3.719302737344173*^9, 3.719302967263892*^9}, {
+  3.719303002115575*^9, 3.719303005300564*^9}, {3.719303191741508*^9, 
+  3.7193031993200197`*^9}, {3.719303385453137*^9, 3.719303394374877*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, {}, 
+    TagBox[
+     {RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[1.6], Opacity[
+      1.], LineBox[CompressedData["
+1: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
+cH9jdhx8h/0feijD+w==
+       "]]},
+     Annotation[#, "Charting`Private`Tag$1405#1"]& ]}, {}, {}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{1., -0.9267374410809662},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{
+   "DefaultBoundaryStyle" -> Automatic, "DefaultMeshStyle" -> 
+    AbsolutePointSize[6], "ScalingFunctions" -> None, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{1, 4}, {-0.9267374410809662, -0.6321205588285583}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{
+  3.719302897868658*^9, 3.719303008074133*^9, 3.7193031627053633`*^9, 
+   3.719303265751946*^9, 3.7193033688387327`*^9, 3.719303409987257*^9, {
+   3.719303650119212*^9, 3.719303661795429*^9}, {3.719303730637664*^9, 
+   3.719303759335225*^9}, 3.71930390136025*^9, {3.719304024670295*^9, 
+   3.7193040352352552`*^9}, 3.719306077094535*^9, 3.71930612113316*^9, 
+   3.719306242791811*^9, 3.719306484017136*^9, 3.719306547412743*^9, 
+   3.719358260502513*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"With integration by parts, the integral evaluates to \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"-", "2.3558193121007862584`6."}]}],
+  SequenceForm[
+  "With integration by parts, the integral evaluates to ", \
+-2.3558193121007862584`6.],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.719302861690753*^9, 3.719302897897015*^9}, 
+   3.7193030080881033`*^9, 3.719303162717445*^9, 3.7193032657631598`*^9, 
+   3.71930336885118*^9, 3.7193034099987698`*^9, {3.719303650130574*^9, 
+   3.71930366180645*^9}, {3.719303730649357*^9, 3.719303759347134*^9}, 
+   3.719303901373288*^9, {3.7193040246815147`*^9, 3.719304035247632*^9}, 
+   3.719306077108622*^9, 3.719306121146352*^9, 3.719306242804068*^9, 
+   3.719306484030397*^9, 3.719306547424654*^9, 3.7193582605156603`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Problem", " ", "1", "b"}], " ", "*)"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.7193029757221613`*^9, 3.719302997651291*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ansmath", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Integrate", "[", 
+      RowBox[{
+       RowBox[{"f", "[", "x", "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "1", ",", "4"}], "}"}]}], "]"}], ",", "6"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{
+   "\"\<With the built-in integration function, the integral evaluates to \
+\>\"", ",", "ansmath", ",", 
+    "\"\<, so both methods produce essentially the same result.\>\""}], "]"}],
+   ";"}]}], "Input",
+ CellChangeTimes->{{3.719303011429744*^9, 3.7193030511300364`*^9}, {
+  3.7193032073969193`*^9, 3.7193032220482597`*^9}, {3.719303525086645*^9, 
+  3.719303647732929*^9}, {3.719303692568508*^9, 3.719303757085703*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"With the built-in integration function, the integral evaluates \
+to \"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "2.3558193121007862584`6."}], 
+   "\[InvisibleSpace]", "\<\", so both methods produce essentially the same \
+result.\"\>"}],
+  SequenceForm[
+  "With the built-in integration function, the integral evaluates to ", \
+-2.3558193121007862584`6., 
+   ", so both methods produce essentially the same result."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.7193036618841476`*^9, {3.7193037307482023`*^9, 3.719303759428281*^9}, 
+   3.719303901462102*^9, {3.719304024774993*^9, 3.719304035369103*^9}, 
+   3.719306077303152*^9, 3.719306121298336*^9, 3.719306242892632*^9, 
+   3.719306484126693*^9, 3.719306547536724*^9, 3.719358260796444*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Problem", " ", "2", "a"}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Trapezoid", " ", "Method"}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"deltax", "=", ".5"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"x0", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"xvec", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"While", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Max", "[", "xvec", "]"}], "<", "4"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"xvec", ",", "x0"}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"x0", "=", 
+        RowBox[{"x0", "+", "deltax"}]}]}]}], "\[IndentingNewLine]", "]"}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"vals", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{
+        RowBox[{"Length", "[", "xvec", "]"}], "-", "1"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"vals", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"f", "[", 
+            RowBox[{"xvec", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "+", "1"}], "]"}], "]"}], "]"}], "+", 
+           RowBox[{"f", "[", 
+            RowBox[{"xvec", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "]"}]}], ")"}], "*", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"xvec", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+            RowBox[{"xvec", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "/", "2"}]}]}], "]"}]}],
+      "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"calc", "=", 
+     RowBox[{"Total", "[", "vals", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<With the trapezoid method, the integral evaluates to \>\"", ",", 
+      " ", "calc"}], "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.719303082758881*^9, 3.7193031229989777`*^9}, {
+   3.7193031593587847`*^9, 3.719303182823371*^9}, {3.719303228274908*^9, 
+   3.7193032585610867`*^9}, 3.719303790971941*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"With the trapezoid method, the integral evaluates to \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"-", "2.3568993256497435`"}]}],
+  SequenceForm[
+  "With the trapezoid method, the integral evaluates to ", \
+-2.3568993256497435`],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.7193032590339613`*^9, 3.719303265890389*^9}, 
+   3.7193033689809313`*^9, 3.719303410127371*^9, {3.719303650251335*^9, 
+   3.719303661934456*^9}, {3.7193037307922297`*^9, 3.7193037594776773`*^9}, 
+   3.719303901507482*^9, {3.719304024817348*^9, 3.7193040354184027`*^9}, 
+   3.719306077325768*^9, 3.719306121350957*^9, 3.7193062429248953`*^9, 
+   3.719306484158751*^9, 3.719306547594067*^9, 3.7193582608179913`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Problem", " ", "2", "b"}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Simpson", "'"}], "s", " ", "Rule"}], " ", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"valssimp", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{
+        RowBox[{"Length", "[", "xvec", "]"}], "-", "1"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"valssimp", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"1", "/", "6"}], "*", 
+            RowBox[{"f", "[", 
+             RowBox[{"xvec", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", "+", "1"}], "]"}], "]"}], "]"}]}], "+", 
+           RowBox[{
+            RowBox[{"2", "/", "3"}], "*", 
+            RowBox[{"f", "[", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"xvec", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", "+", "1"}], "]"}], "]"}], "+", 
+                RowBox[{"xvec", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "/", "2"}], "]"}]}],
+            "+", 
+           RowBox[{
+            RowBox[{"1", "/", "6"}], "*", 
+            RowBox[{"f", "[", 
+             RowBox[{"xvec", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "]"}]}]}], ")"}], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"xvec", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+           RowBox[{"xvec", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ")"}]}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"calcsimp", "=", 
+     RowBox[{"Total", "[", "valssimp", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<With Simpson's rule, the integral evaluates to \>\"", ",", 
+      "calcsimp"}], "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.719303287559608*^9, 3.7193033662631207`*^9}, {
+  3.719303816724326*^9, 3.719303897421958*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"With Simpson's rule, the integral evaluates to \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"-", "2.3558354441801517`"}]}],
+  SequenceForm[
+  "With Simpson's rule, the integral evaluates to ", -2.3558354441801517`],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.719303369031684*^9, 3.7193034101752*^9, {3.719303650307719*^9, 
+   3.7193036619850283`*^9}, {3.719303730837779*^9, 3.719303759521572*^9}, 
+   3.719303901560512*^9, {3.719304024874013*^9, 3.719304035472929*^9}, 
+   3.719306077377363*^9, 3.719306121399037*^9, 3.719306242977994*^9, 
+   3.719306484207841*^9, 3.719306547643471*^9, 3.7193582608681917`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "If", " ", "we", " ", "take", " ", "the", " ", "answer", " ", "from", " ",
+      "the", " ", "built", " ", "in", " ", "Integration", " ", "function", 
+     " ", "to", " ", "be", " ", "the", " ", "true", " ", "value"}], ",", " ", 
+    
+    RowBox[{
+    "then", " ", "we", " ", "have", " ", "the", " ", "following", " ", 
+     "absolute", " ", "errors"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"abserrtrap", "=", 
+     RowBox[{"Abs", "[", 
+      RowBox[{"calc", "-", "ansmath"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"abserrsimp", "=", 
+     RowBox[{"Abs", "[", 
+      RowBox[{"calcsimp", "-", "ansmath"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<The absolute error using the trapezoid method is \>\"", ",", " ", 
+      "abserrtrap"}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<The absolute error using Simpson's Rule is \>\"", ",", " ", 
+      "abserrsimp"}], "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.7193039055344048`*^9, 3.719304032202196*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The absolute error using the trapezoid method is \"\>", 
+   "\[InvisibleSpace]", "0.0010800135489570373`"}],
+  SequenceForm[
+  "The absolute error using the trapezoid method is ", 0.0010800135489570373`],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.719304024923704*^9, 3.7193040355209703`*^9}, 
+   3.71930607742062*^9, 3.7193061214525213`*^9, 3.719306243033202*^9, 
+   3.719306484264134*^9, 3.719306547692854*^9, 3.719358260918062*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The absolute error using Simpson's Rule is \"\>", 
+   "\[InvisibleSpace]", "0.00001613207936523864`"}],
+  SequenceForm[
+  "The absolute error using Simpson's Rule is ", 0.00001613207936523864],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.719304024923704*^9, 3.7193040355209703`*^9}, 
+   3.71930607742062*^9, 3.7193061214525213`*^9, 3.719306243033202*^9, 
+   3.719306484264134*^9, 3.719306547692854*^9, 3.719358260926941*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", "5.2", " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Problem", " ", "1"}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Midpoint", " ", "Method"}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"mids", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{
+        RowBox[{"Length", "[", "xvec", "]"}], "-", "1"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"mids", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"xvec", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", "+", "1"}], "]"}], "]"}], "+", 
+           RowBox[{"xvec", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "/", "2"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"valsmid", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{
+        RowBox[{"Length", "[", "xvec", "]"}], "-", "1"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"valsmid", ",", 
+        RowBox[{
+         RowBox[{"f", "[", 
+          RowBox[{"mids", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "]"}], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"xvec", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+           RowBox[{"xvec", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ")"}]}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"calcmid", "=", 
+     RowBox[{"Total", "[", "valsmid", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"abserrmid", "=", 
+     RowBox[{"Abs", "[", 
+      RowBox[{"calcmid", "-", "ansmath"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<With the midpoint method, the integral evaluates to \>\"", ",", 
+      "calcmid"}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<The absolute error using the midpoint method is \>\"", ",", " ", 
+      "abserrmid"}], "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.719304064540896*^9, 3.719304088021097*^9}, {
+  3.719306104369184*^9, 3.7193062399593287`*^9}, {3.7193064584718513`*^9, 
+  3.719306481457169*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"With the midpoint method, the integral evaluates to \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"-", "2.3553035034453558`"}]}],
+  SequenceForm[
+  "With the midpoint method, the integral evaluates to ", \
+-2.3553035034453558`],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.719306159121323*^9, 3.719306205608034*^9, 
+  3.719306243099718*^9, 3.7193064843313913`*^9, 3.719306547758997*^9, 
+  3.7193582609847107`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The absolute error using the midpoint method is \"\>", 
+   "\[InvisibleSpace]", "0.0005158086554306607`"}],
+  SequenceForm[
+  "The absolute error using the midpoint method is ", 0.0005158086554306607],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.719306159121323*^9, 3.719306205608034*^9, 
+  3.719306243099718*^9, 3.7193064843313913`*^9, 3.719306547758997*^9, 
+  3.71935826099349*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"So", " ", "in", " ", "this", " ", "example"}], ",", " ", 
+    RowBox[{
+     RowBox[{"Simpson", "'"}], "s", " ", "Rule", " ", "provides", " ", "the", 
+     " ", "most", " ", "accurate", " ", "estimate"}], ",", " ", 
+    RowBox[{
+    "followed", " ", "by", " ", "the", " ", "midpoint", " ", "method"}], ",", 
+    " ", 
+    RowBox[{"followed", " ", "by", " ", "the", " ", "trapezoid", " ", 
+     RowBox[{"method", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "Note", " ", "that", " ", "Theorem", " ", "5.2", ".1", " ", "on", " ", 
+     "page", " ", "102", " ", "does", " ", "not", " ", "guarantee", " ", 
+     "that", " ", "the", " ", "absolute", " ", "error", " ", "of", " ", "the",
+      " ", "midpoint", " ", "method", " ", "will", " ", "be", " ", "less", 
+     " ", "than", " ", "the", " ", "absolute", " ", "error", " ", "of", " ", 
+     "the", " ", "trapezoid", " ", "method", " ", "in", " ", "this", " ", 
+     "case"}], ",", " ", 
+    RowBox[{
+    "since", " ", "f", " ", "is", " ", "not", " ", "strictly", " ", "concave",
+      " ", "up", " ", "or", " ", "concave", " ", "down", " ", "on", " ", 
+     "the", " ", "interval", " ", "in", " ", "question"}], ",", " ", 
+    RowBox[{
+    "so", " ", "we", " ", "need", " ", "not", " ", "have", " ", "expected", 
+     " ", "it", " ", "to", " ", "work", " ", "out", " ", "that", " ", 
+     RowBox[{"way", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]"}]], "Input",\
+
+ CellChangeTimes->{{3.719306341367557*^9, 3.7193064411797867`*^9}, {
+  3.719306495016993*^9, 3.719306544029451*^9}, {3.7193065833643217`*^9, 
+  3.719306678805031*^9}, {3.71930685191763*^9, 3.7193068598309793`*^9}, {
+  3.7193583650507917`*^9, 3.7193583670265903`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7193062481351433`*^9, 3.71930625665204*^9}, {
+  3.719306298998427*^9, 3.7193062994388638`*^9}}]
+},
+WindowSize->{808, 602},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
+21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 2337, 62, 369, "Input"],
+Cell[2920, 86, 5014, 96, 231, "Output"],
+Cell[7937, 184, 817, 15, 24, "Print"]
+}, Open  ]],
+Cell[8769, 202, 203, 5, 54, "Input"],
+Cell[CellGroupData[{
+Cell[8997, 211, 781, 20, 75, "Input"],
+Cell[9781, 233, 803, 16, 44, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10621, 254, 2634, 71, 432, "Input"],
+Cell[13258, 327, 743, 14, 24, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14038, 346, 2389, 67, 264, "Input"],
+Cell[16430, 415, 670, 13, 24, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17137, 433, 1267, 33, 180, "Input"],
+Cell[CellGroupData[{
+Cell[18429, 470, 492, 9, 24, "Print"],
+Cell[18924, 481, 481, 9, 24, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19454, 496, 2856, 79, 411, "Input"],
+Cell[CellGroupData[{
+Cell[22335, 579, 467, 11, 24, "Print"],
+Cell[22805, 592, 439, 9, 24, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[23271, 605, 1832, 36, 201, "Input"],
+Cell[25106, 643, 144, 2, 32, "Input"]
+}
+]
+*)
+
