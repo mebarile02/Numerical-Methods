@@ -1,0 +1,2484 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    102366,       2476]
+NotebookOptionsPosition[    100202,       2414]
+NotebookOutlinePosition[    100562,       2430]
+CellTagsIndexPosition[    100519,       2427]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Michael", " ", "Barile", "\[IndentingNewLine]", "MATH", " ", "68500", 
+    "\[IndentingNewLine]", "Fourier", " ", "Coefficients"}], " ", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"lambda", " ", "=", " ", ".35"}], " ", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"alpha", "=", ".35"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"deltax", "=", ".1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"deltat", "=", ".01"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"lambda", "=", 
+     RowBox[{"alpha", "*", 
+      RowBox[{"deltat", "/", 
+       RowBox[{"deltax", "^", "2"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"vector", " ", "of", " ", "x", " ", "values", " ", "from"}], 
+      " ", "-", 
+      RowBox[{
+      "5", " ", "to", " ", "5", " ", "in", " ", "steps", " ", "of", " ", 
+       "deltax"}]}], " ", "=", " ", "0.1"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"xvec", "=", 
+     RowBox[{"{", 
+      RowBox[{"-", "5"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"x0", "=", 
+     RowBox[{"-", "5"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"While", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Max", "[", "xvec", "]"}], "<", "5"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"x", "=", 
+        RowBox[{"x0", "+", "deltax"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"xvec", ",", "x"}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"x0", "=", "x"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}],
+    "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"xvec", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "]"}], "<", 
+          RowBox[{"10", "^", 
+           RowBox[{"-", "5"}]}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"xvec", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "=", "0"}]}], 
+        "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+     "temperature", " ", "values", " ", "along", " ", "rod", " ", "at", " ", 
+      "time", " ", "t"}], " ", "=", " ", "0"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uvec", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"i", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"uvec", ",", "20"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"uvec", ",", "0"}], "]"}]}], "\[IndentingNewLine]", "]"}], 
+       ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Constructing", " ", "matrix", " ", "A"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+      "One", " ", "of", " ", "the", " ", "sources", " ", "of", " ", 
+       "confusion", " ", "in", " ", "this", " ", "exercise", " ", "is", " ", 
+       "that", " ", "the", " ", "theorem", " ", "involving", " ", "Fourier", 
+       " ", "Coefficients", " ", "in", " ", "the", " ", "text", " ", "and", 
+       " ", "stability", " ", "involves", " ", "the", " ", "unaltered", " ", 
+       "matrix", " ", "A"}], ",", " ", 
+      RowBox[{
+      "where", " ", "we", " ", "do", " ", "not", " ", "replace", " ", "the", 
+       " ", "first", " ", "and", " ", "last", " ", "rows", " ", "with", " ", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "0", ",", "0", ",", 
+         RowBox[{"...", " ", "0"}]}], "}"}], " ", "and", " ", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", "0", ",", 
+         RowBox[{
+          RowBox[{"...", "..."}], ".."}], ",", "1"}], "}"}], " ", "in", " ", 
+       "order", " ", "to", " ", "fix", " ", "the", " ", "temperatures", " ", 
+       "at", " ", "each", " ", "end", " ", "of", " ", "the", " ", 
+       RowBox[{"rod", ".", "  ", "What"}], " ", "is", " ", "the", " ", 
+       "justification", " ", "of", " ", "this", " ", "as", " ", "it", " ", 
+       "relates", " ", "to", " ", "the", " ", "theorem", " ", "in", " ", 
+       "the", " ", 
+       RowBox[{"text", "?"}]}]}], " ", "*)"}],
+    FontColor->RGBColor[1, 0, 0]], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"A", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"inew", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"j", "=", "1"}], ",", 
+         RowBox[{"j", "\[LessEqual]", 
+          RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+         RowBox[{"++", "j"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"j", "\[Equal]", "i"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"inew", ",", 
+              RowBox[{"1", "-", 
+               RowBox[{"2", "*", "lambda"}]}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"j", "\[Equal]", 
+                 RowBox[{"i", "-", "1"}]}], "||", 
+                RowBox[{"j", "==", 
+                 RowBox[{"i", "+", "1"}]}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"inew", ",", "lambda"}], "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"inew", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+              "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"A", ",", "inew"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Constructing", " ", "and", " ", "replacing", " ", "top", " ", "and", " ",
+      "bottom", " ", "rows", " ", "in", " ", "matrix", " ", "A", " ", "to", 
+     " ", "fix", " ", "the", " ", "first", " ", "and", " ", "last", " ", 
+     "entry", " ", "of", " ", "uvec"}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"toprow", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"i", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"toprow", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"toprow", ",", "0"}], "]"}]}], "\[IndentingNewLine]", "]"}],
+        ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"bottomrow", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"i", "\[Equal]", 
+          RowBox[{"Length", "[", "xvec", "]"}]}], ",", "\[IndentingNewLine]", 
+         
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"bottomrow", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"bottomrow", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+        "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"A", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "=", "toprow"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"A", "[", 
+      RowBox[{"[", 
+       RowBox[{"Length", "[", "xvec", "]"}], "]"}], "]"}], "=", "bottomrow"}],
+     ";"}], " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", "DFT", " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"M", " ", "=", " ", "101"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dftm", " ", "=", " ", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", " ", "=", "0"}], ",", " ", 
+      RowBox[{"k", " ", "\[LessEqual]", " ", 
+       RowBox[{"M", " ", "-", "1"}]}], ",", " ", 
+      RowBox[{"++", "k"}], ",", " ", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"row", " ", "=", " ", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", " ", "=", "0"}], ",", " ", 
+         RowBox[{"i", " ", "\[LessEqual]", " ", 
+          RowBox[{"M", "-", "1"}]}], ",", " ", 
+         RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"xi", " ", "=", " ", 
+           RowBox[{"2", "*", 
+            RowBox[{"Pi", "/", "M"}], " ", "*", " ", "i"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"row", ",", " ", 
+            RowBox[{"E", "^", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "I"}], "*", "k", "*", "xi"}], ")"}]}]}], 
+           "]"}]}]}], " ", 
+        RowBox[{"(*", " ", 
+         RowBox[{"using", " ", "negative", " ", "sign", " ", "here"}], " ", 
+         "*)"}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"dftm", ",", "row"}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dftm", "=", 
+     RowBox[{"Simplify", "[", "dftm", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dftm", "=", 
+     RowBox[{"dftm", "/", 
+      RowBox[{"Sqrt", "[", "M", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "uvectors", " ", "including", " ", "initial", " ", "state", " ", "and", 
+     " ", "next", " ", "100", " ", "time", " ", "steps"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uvectors", "=", 
+     RowBox[{"{", "uvec", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uvec0", "=", "uvec"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "100"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"uvec0", "=", 
+        RowBox[{"A", ".", "uvec0"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"uvectors", ",", "uvec0"}], "]"}]}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "determining", " ", "Fourier", " ", "Coefficients", " ", "and", " ", 
+     "storing", " ", "vector", " ", "of", " ", "coefficients", " ", "at", " ",
+      "each", " ", "time", " ", "step", " ", "in", " ", "a", " ", "vector"}], 
+    " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fourcoef", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "uvectors", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"fourcoef", ",", 
+        RowBox[{"dftm", ".", 
+         RowBox[{"uvectors", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "extracting", " ", "element", " ", "twenty", " ", "five", " ", "from", 
+     " ", "each", " ", "coefficient", " ", "vector", " ", "in", " ", 
+     "fourcoef"}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{"coef25", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "fourcoef", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"coef25", ",", 
+        RowBox[{
+         RowBox[{"fourcoef", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "25", "]"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "finding", " ", "norm", " ", "of", " ", "above", " ", "coefficient", " ", 
+     "at", " ", "each", " ", "time", " ", "step"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"normcoef25", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "coef25", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"normcoef25", ",", 
+        RowBox[{"Norm", "[", 
+         RowBox[{"coef25", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"ListPlot", "[", "normcoef25", "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.718057776769718*^9, 3.7180578019984426`*^9}, {
+   3.718057863214046*^9, 3.7180578633732853`*^9}, {3.718060359367682*^9, 
+   3.71806098800254*^9}, {3.718061040101694*^9, 3.7180610480087423`*^9}, {
+   3.718061078105484*^9, 3.718061092589636*^9}, {3.7180611721414957`*^9, 
+   3.7180613764938583`*^9}, 3.7180616064552*^9, {3.7180846438719263`*^9, 
+   3.7180848620542297`*^9}, {3.718084946488525*^9, 3.718085180264936*^9}, {
+   3.71808521933816*^9, 3.7180853150951014`*^9}, {3.718085348418071*^9, 
+   3.71808535040406*^9}, {3.718085513934746*^9, 3.718085515500286*^9}, {
+   3.7180857557987213`*^9, 3.718085757157299*^9}, {3.7180858072528887`*^9, 
+   3.7180860378428993`*^9}, {3.718086159710897*^9, 3.7180861723342543`*^9}, {
+   3.718086545711481*^9, 3.718086578155761*^9}, {3.7180866165583687`*^9, 
+   3.718086620421809*^9}, {3.718086651796276*^9, 3.7180866612328568`*^9}, {
+   3.718087310739971*^9, 3.718087329692418*^9}, {3.7180879180041018`*^9, 
+   3.71808794629803*^9}, {3.718129828706382*^9, 3.718129856448007*^9}, {
+   3.718129889018093*^9, 3.7181302306076107`*^9}, {3.718130263431897*^9, 
+   3.71813026438892*^9}, {3.718131442556798*^9, 3.71813145727178*^9}, {
+   3.71813163401254*^9, 3.718131659221133*^9}, {3.7181324901618853`*^9, 
+   3.7181324908813553`*^9}, {3.7181346993333483`*^9, 3.718134707374221*^9}, {
+   3.71813476238181*^9, 3.718134963021179*^9}, {3.7181350629290237`*^9, 
+   3.7181350856519613`*^9}, {3.718135388899424*^9, 
+   3.718135390585637*^9}},ExpressionUUID->"00499d10-64ba-4870-a501-\
+2c5bdba121dd"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJw1iwlMk2cch6FuxCBMzoFxbMwBBQQq5+i09Ee5OmqBUtp+GCZXmFNEAoGJ
+ITIyHU4z5Apy6TyYyMZVZjbFdYjQjQ0Q6IgodrCpQxavtISNUxmL3/9N3rx5
+3uf3vJ2WHZ/BMTExyVi7/78vj0Ho4fPLdub2qpD9wMTsfn5ehCle4nqYeT+w
+0qeZsGwFfZuicTiB9nY4IeT87e/9gmVHbLDIEKQwz1l+A7tzryxUXFth2Rm6
+/LcuRIYRb8FNUYxRP73MsgvcTols6uqJ3XBGHH4yKYnYHdmZXkGjXGJPSBJT
+RlqWllj2wudV4wdUY8Q+WJhpfbVVTbwN983SJocriH2hTirQbPqY2A+ur/Tc
+2PABsT/47QM+wkjiABh+OpiX5ksciLhbfVL/N4mDUMPpExRaEL8LLw/Nc4uV
+RZaDUT0dXdX7hJiPzkMtk4VTxO9BP5d4yElHvB3PFp0flGmJd0BzuWig+yqx
+AK7HRo7VthGHQN5/q82ykVgIM91etVUdMfD4hLqhuozlYmDPEeZORQn5UGhc
+/JaWD5MPRSFjVzOYT14Ejl+ey2IWeREyvz1w9/CH5MMw6xTVIE8mHwa3LeVT
+eQz5cLhxd5/9XUY+HJocE2mJhHwExhW3f8yKIB+BLp7xnTIh+Uik7uKum+GT
+j8RWbbF7bgD5KKRqv77gzSO/xs+YH173JC/GZv4nRk9X8mJogrhze5zJv4/q
+44/PDG4mv8b7DQa5A/loXOPF2q7akI/GvNW0ZPA18hJ89G/B6vfm5CXoVXi3
+95iR34l0m0DjQw75nVif3FfgvrrAeimibvDMjy6zXCxFeoi4aGGefAweFg1d
+PzpHPgZ/pFgOcI3kY1Fg2nbpz6fkY9GlLcxpf0Q+DjPSbGn5DMuIg+CqOuuz
+v2gfhzn19Y2l91juiYMmsbmwaYp6GTiO0et0eupl2NHSZmoxQb0MVjZ77yrH
+qZdhzLBxUT1GfTxmpR2jm3TUx+OLerm+fJj6eJg71NbZD1Efj5PdIZWXfqVe
+jqfzI7LIfurlqEwO3WfUUi/HjGVjbnMv9XL03/zNLLOH+gQc6QvoD+6mPgFf
+Wecw1hrqE+BhG5Q+10V9Ao4Pvai6d4V6BUYEk/V3vqNegYNR4q0Tl6lXIF//
+ZPl+J/Vr++BPf/6ng3olaubPRVm3U7/G7adDAlupVyLfNCUr9RvqlRA/iq6t
+bqZeBQd72xJdE/UqOHKbVu0uUq+C04jlaHIj9Sr0FSm0neepZ2DfkdNifo56
+BqXV7sp9X1LPQLpt5dToaeoZ8CvtRYIG6hMh2eXrra6jPhEXQ0t5HrULwv8A
+QTv6gA==
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 1.5245670247645073`},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 101.}, {1.5371486527911682`, 1.7887812133243894`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{
+  3.718085181687354*^9, 3.718085223535976*^9, {3.718085273555901*^9, 
+   3.718085316624528*^9}, 3.718085384042342*^9, 3.718085518570612*^9, 
+   3.7180857785422373`*^9, 3.7180860393679657`*^9, 3.718086517351755*^9, {
+   3.718086596705058*^9, 3.718086663766823*^9}, {3.7180873503620577`*^9, 
+   3.718087362704651*^9}, 3.718087425967585*^9, {3.71808747774518*^9, 
+   3.718087491855023*^9}, 3.718087618035318*^9, 3.718087925921813*^9, 
+   3.718088181290948*^9, 3.718088265142296*^9, 3.718088483205447*^9, 
+   3.718089213256548*^9, 3.718089279477553*^9, {3.718089332320971*^9, 
+   3.718089360173204*^9}, {3.7180897055731163`*^9, 3.718089724588964*^9}, 
+   3.718089767328915*^9, 3.718089830334394*^9, 3.7180899944416237`*^9, 
+   3.7181297561715107`*^9, 3.718129837650241*^9, 3.718131684474146*^9, 
+   3.718131906494079*^9, {3.718132205000396*^9, 3.7181322310432043`*^9}, 
+   3.718132495256936*^9, 3.718132982427689*^9, 3.718133120400318*^9, 
+   3.718133162941062*^9, 3.718133490882658*^9, 3.718133573082562*^9, 
+   3.718133609371662*^9, 3.7181337295147877`*^9, 3.718133861658887*^9, 
+   3.718134033963999*^9, 3.718134101639781*^9, 3.718134199793044*^9, 
+   3.7181343020715523`*^9, 3.718134469836678*^9, 3.718134661054281*^9, 
+   3.718134711088724*^9, 3.71813504995824*^9, 3.718135398089429*^9, 
+   3.718135580334713*^9},ExpressionUUID->"5d49bdec-a8e5-481a-9c97-\
+b7004c66fd9d"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.718086053857259*^9, 3.718086058880796*^9}, {
+  3.718086511611998*^9, 
+  3.718086514101696*^9}},ExpressionUUID->"4d2fd642-e3ab-4009-b4d1-\
+f0584b5d9261"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"normratio25", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{
+        RowBox[{"Length", "[", "normcoef25", "]"}], "-", "1"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"normratio25", ",", 
+        RowBox[{
+         RowBox[{"normcoef25", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", "+", "1"}], "]"}], "]"}], "/", 
+         RowBox[{"normcoef25", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+     "We", " ", "can", " ", "see", " ", "from", " ", "the", " ", "plot", " ", 
+      "below", " ", "that", " ", "the", " ", "ratio", " ", "of", " ", "norms",
+       " ", "of", " ", "successive", " ", "fourier", " ", "coefficients", " ",
+       "associated", " ", "with", " ", "the", " ", "25", "th", " ", "entry", 
+      " ", "is", " ", "less", " ", "than", " ", "one"}], ",", " ", 
+     RowBox[{
+     "which", " ", "corresponds", " ", "with", " ", "the", " ", "theorem", 
+      " ", "in", " ", "the", " ", "text"}], ",", " ", 
+     RowBox[{
+      RowBox[{"since", " ", "lambda"}], " ", "=", " ", ".35"}]}], " ", "*)"}],
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Show", "[", 
+    RowBox[{"ListPlot", "[", "normratio25", "]"}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.7180611761498413`*^9, 3.7180611789229937`*^9}, {
+  3.71808622950935*^9, 3.7180865057641706`*^9}, {3.7180865852052393`*^9, 
+  3.7180865932908173`*^9}, {3.718087334107275*^9, 3.718087358988187*^9}, {
+  3.718133394254125*^9, 3.7181334810992727`*^9}, {3.7181351975387907`*^9, 
+  3.7181352438316708`*^9}},ExpressionUUID->"cf417e44-a226-4c5f-959a-\
+ff1190cbee0e"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJw9yw1MFGQcx/GDaOgwdINpSrxlYAgxxQQT9X7gydspd9wboIFlIqPV0AYU
+pnHMzW6gwxSPzRPFVFCUENhxFPPGLix2iIEl6EEsiLdx41Xj7Tx6Wfz/z/bs
+2ef57et7KFOW5igQCA7/e/97/z+TwvYDH+vyD0wJlz6QPnLrTMD740tehhCn
+tpXmEvIqVI4tX7v6MdkdyXnuflKviSW/jmXTXY5WOfkNnO9xFnt/SfbBqeJn
+ruFa8puQ/JDjffc2+S18uznHx2Ig+yMvWGMoMJHfRsGFvpk2M3kjAg8+G0ru
+IAfBer9He6OTHIzG3OapRQt5E1L+Fq2/1kvejI+c7+XV9ZFDkGYIK5IPkLfA
+e3r0WMkQ+V2YhxdfPTdC3opwz97UuFFyKJIjQpvbreQwdP5akxY4Rt4Gj0b/
+7g/Gye/hTOlCfs4EeTvq9F6mo5PkcFyXtkbIp8g7YIn9aYXvNHkn9G1FtT3s
+XahybE/RPCcL0f1QP+T3ggycLMzrqyerAf0lt8odf9EegYZ18k8byOoItA6X
+bwqcoT0SG25ueHqRrI5E70hl4Dzvu/Fn6bhFOUv7btyfcc2/SxaIEHIro8LO
+uwhy8/KW2Dna9yB6Ta3kG7J6Dyp6tVd/4z0KNZeeuLrP0x4FZbreKiELotFx
+4vsTGt6j4b/+rIOR9xg4bf+lbpL3GFQdNP3ss0B7LLL+GPwknqyOxeHB449y
+eY9D/4M5t+u8x0E+9NmHZt7FEL0z3TXBuxj9zT9edLPRvhdOpcb6rWT1XgSM
+qBUq3vdhrqz8dDbv+/Ddy/lDF3iPx5OiK/Zq3uPh1RaW0cq7BKajLoZB3iXI
+V/rMLvIuRbf3/m1rXi4ZUnh6ndcEk9VSiKurXojITVLEfVGr2U8WJODz8qeS
+TO4TMJelU5ziPgFj/i1lWu4TkHqlcOdt7mUwG77a0si9DCs1NQUPuZeh6bI+
+7nfuZYhRVRwf416OyKxQXzv3cngMV4lW2KmX47WFhdF15CY5igfq1gaQBQoU
+P/bsDCVDgcuZIX4i7hW4KrjpksC9AtbVw2dTuFdi1WDQvQzulbDtOpaTzb0S
+HuLcATX3SpSNddkLuVfBODX5QMu9CndmbcJr3KsQHeSceYd7FaofzSv13Cei
+4mvtrJH7RESVnFS1cJ+II93B2R3cJ0JX66KycJ+EVGOSrZ/7JJhOC9Ot3Ceh
+xaFd95z7JDQ4OOps3CejuKD+yCuLE8J/ANguKSU=
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0.9921625287827376},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImageMargins->0.,
+  ImagePadding->All,
+  ImageSize->Automatic,
+  ImageSizeRaw->Automatic,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 100.}, {0.9927196885111502, 1.003862883079406}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.718086380368402*^9, 3.718086418974176*^9}, {
+   3.7180864719417753`*^9, 3.718086517430987*^9}, {3.7180865968195133`*^9, 
+   3.718086624618346*^9}, {3.718087350490509*^9, 3.7180873628636503`*^9}, 
+   3.7180874261217127`*^9, {3.718087477823864*^9, 3.718087491944887*^9}, 
+   3.71808761811203*^9, 3.7180879260108843`*^9, 3.718088181387679*^9, 
+   3.718088265234741*^9, 3.718088483330106*^9, 3.718089213342492*^9, 
+   3.718089279559779*^9, {3.718089332407818*^9, 3.718089360262273*^9}, {
+   3.718089705653442*^9, 3.7180897246689463`*^9}, 3.718089767407281*^9, 
+   3.718089830466922*^9, 3.7180899945173264`*^9, 3.718129756323927*^9, 
+   3.71812983911726*^9, 3.71813168454805*^9, 3.7181319065769367`*^9, {
+   3.718132205101617*^9, 3.718132231123876*^9}, 3.718132495349452*^9, 
+   3.718132982526268*^9, 3.718133120489538*^9, 3.718133163017887*^9, 
+   3.7181334909873533`*^9, 3.718133573173617*^9, 3.7181336094538813`*^9, 
+   3.718133729587521*^9, 3.718133861739476*^9, 3.718134034038212*^9, 
+   3.718134101721867*^9, 3.718134199922669*^9, 3.718134302207576*^9, 
+   3.718134469902215*^9, 3.718134661139639*^9, 3.718134711213435*^9, 
+   3.718135050037978*^9, 3.718135398180173*^9, 
+   3.718135580501788*^9},ExpressionUUID->"5c6986e6-1ae2-4b09-8a0b-\
+b422433fe801"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.718060320029924*^9, 
+  3.718060320039483*^9}},ExpressionUUID->"1a8dbe83-20a2-4490-8616-\
+750cec60a3d3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"(*", 
+    RowBox[{
+    "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+      "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+     "**"}], "******)"}],
+   FontColor->RGBColor[1, 0, 0]], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"lambda", " ", "at", " ", ".40"}], " ", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"alpha", "=", ".40"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"deltax", "=", ".1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"deltat", "=", ".01"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"lambda", "=", 
+     RowBox[{"alpha", "*", 
+      RowBox[{"deltat", "/", 
+       RowBox[{"deltax", "^", "2"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"A", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"inew", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"j", "=", "1"}], ",", 
+         RowBox[{"j", "\[LessEqual]", 
+          RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+         RowBox[{"++", "j"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"j", "\[Equal]", "i"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"inew", ",", 
+              RowBox[{"1", "-", 
+               RowBox[{"2", "*", "lambda"}]}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"j", "\[Equal]", 
+                 RowBox[{"i", "-", "1"}]}], "||", 
+                RowBox[{"j", "==", 
+                 RowBox[{"i", "+", "1"}]}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"inew", ",", "lambda"}], "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"inew", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+              "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"A", ",", "inew"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"toprow", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"i", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"toprow", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"toprow", ",", "0"}], "]"}]}], "\[IndentingNewLine]", "]"}],
+        ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"bottomrow", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"i", "\[Equal]", 
+          RowBox[{"Length", "[", "xvec", "]"}]}], ",", "\[IndentingNewLine]", 
+         
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"bottomrow", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"bottomrow", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+        "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"A", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "=", "toprow"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"A", "[", 
+      RowBox[{"[", 
+       RowBox[{"Length", "[", "xvec", "]"}], "]"}], "]"}], "=", "bottomrow"}],
+     ";"}], " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", "DFT", " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"M", " ", "=", " ", "101"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dftm", " ", "=", " ", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", " ", "=", "0"}], ",", " ", 
+      RowBox[{"k", " ", "\[LessEqual]", " ", 
+       RowBox[{"M", " ", "-", "1"}]}], ",", " ", 
+      RowBox[{"++", "k"}], ",", " ", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"row", " ", "=", " ", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", " ", "=", "0"}], ",", " ", 
+         RowBox[{"i", " ", "\[LessEqual]", " ", 
+          RowBox[{"M", "-", "1"}]}], ",", " ", 
+         RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"xi", " ", "=", " ", 
+           RowBox[{"2", "*", 
+            RowBox[{"Pi", "/", "M"}], " ", "*", " ", "i"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"row", ",", " ", 
+            RowBox[{"E", "^", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "I"}], "*", "k", "*", "xi"}], ")"}]}]}], 
+           "]"}]}]}], " ", 
+        RowBox[{"(*", " ", 
+         RowBox[{"using", " ", "negative", " ", "sign", " ", "here"}], " ", 
+         "*)"}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"dftm", ",", "row"}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dftm", "=", 
+     RowBox[{"Simplify", "[", "dftm", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dftm", "=", 
+     RowBox[{"dftm", "/", 
+      RowBox[{"Sqrt", "[", "M", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "uvectors", " ", "including", " ", "initial", " ", "state", " ", "and", 
+     " ", "next", " ", "100", " ", "time", " ", "steps"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uvectors", "=", 
+     RowBox[{"{", "uvec", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uvec0", "=", "uvec"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "100"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"uvec0", "=", 
+        RowBox[{"A", ".", "uvec0"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"uvectors", ",", "uvec0"}], "]"}]}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "determining", " ", "Fourier", " ", "Coefficients", " ", "and", " ", 
+     "storing", " ", "vector", " ", "of", " ", "coefficients", " ", "at", " ",
+      "each", " ", "time", " ", "step", " ", "in", " ", "a", " ", "vector"}], 
+    " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fourcoef", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "uvectors", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"fourcoef", ",", 
+        RowBox[{"dftm", ".", 
+         RowBox[{"uvectors", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "extracting", " ", "element", " ", "twenty", " ", "five", " ", "from", 
+     " ", "each", " ", "coefficient", " ", "vector", " ", "in", " ", 
+     "fourcoef"}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{"coef25", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "fourcoef", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"coef25", ",", 
+        RowBox[{
+         RowBox[{"fourcoef", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "25", "]"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "finding", " ", "norm", " ", "of", " ", "above", " ", "coefficient", " ", 
+     "at", " ", "each", " ", "time", " ", "step"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"normcoef25", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "coef25", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"normcoef25", ",", 
+        RowBox[{"Norm", "[", 
+         RowBox[{"coef25", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"ListPlot", "[", "normcoef25", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.718087405943926*^9, 3.718087419983552*^9}, 
+   3.718087807185306*^9, {3.718088143463497*^9, 3.718088177494749*^9}, {
+   3.718088437747178*^9, 3.7180884632203693`*^9}, {3.718131816828993*^9, 
+   3.718131822455514*^9}, {3.718133372263917*^9, 3.7181333776771107`*^9}, {
+   3.718133544764279*^9, 3.7181335688611593`*^9}, {3.718133633157926*^9, 
+   3.71813370222094*^9}, {3.7181350018025103`*^9, 
+   3.7181350047942123`*^9}},ExpressionUUID->"14797eb9-59df-4ec1-a8f5-\
+d64a8cef1a67"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJw1iwtQ1GUUR1eJJRoUMElFGhcQDUMXgXioKz8WEFgewr4hgdGSQkUbzWTG
+nVJhleT9sl1FZVVgIIJiDGVIIEEkGhBcdK2EQmF47CISQy7vavzfO/PNnfOd
+e+z3HRHuX8pisfb/9/7fr+elr/OWtu1y3aIv8wGfCUNXtXoJXuObuNdoO21p
+z2LYCt6S5SeWtyww9yuRHcebssmeZ3g1ktfuMZ57OMewHTh2Nz3H+MQc/Mxp
+nz34xyzDDnBTDrI90ojXo/mxNKgtkHgDLgS32swvI34PtXe8nj3vm2F4E1xH
+RAW2tcQu0Fb/YpqaR7wFw+tXOZgcI3bF6eT4twxS4q0QTbpfvcEjdsNKiUt7
+0wZid+QXHWIPWBN7wF3FPX1/YZrhD3D+6KVE7hixJ4Z4x7/WPyX2wqejo9ba
+DmJvOFUNWbQ0EvtgLuiJQlNDvA3DcXH1wlLi7XgVo1XevUi8A4rLjV/1ZRPz
+kDHhV35BSbwT254+NO09SeyLjWldQSVHiYEbbyflDSQyfAqwrP6On7uXvB8m
+Be+2XIsm74cX3EMHrYXk+agd18keC8jzsZc/Jdf7k/dHmXPdEwGPvD92vNS0
+jXuSD8BiT1XuI1fyAajRZLGNm8gHQp1TLxM5kQ8Eu+x984F15HfB0S52pNSW
+/C5cKj5rrrYhH4SJk3drb1mRD0LMCsvPWRbkg1EQazb1mRn5YNSe8lljZkI+
+BA0h7OGmBSPjQ2ArepVRNMMwSwCLJIVY9Q95AXJWm5TX/E0+FE66PVajL8iH
+wqb4gDNPTz4Mmc6mFRVD5MPgqLWN3TpAPhzmxjlO11/kw7EUukFlL/kIHPYJ
+q4z6nXwEBBz3VDcd+d0Q+xxL39hDfje+VU8buN3kI3GlsPVPQSfDiIT2Y6vS
+E7/SfSRmtckZP7Yx3BQJtZ14xKSV+igoXRfX7mumPgp1M/4ZD5qoj4L3zvby
+0Abqo7D5eb7+UT31QpRoUh4k1VEvRMCqsd9W3KJeiMNJmwtbblIvhHVHaO6Z
+GupFUI8XfxT2PfUi9HCVpfZV1IuQn/7G9JJK6kUwf0e1YCinXgznhIG4Z2XU
+iyFRKe71l1AvRltKef/oderF4Hd4JMxrqJfgfpqX+Zpi6iWIdTCk8K5QL0F8
+eEregSLqJehomJ28epF6KfiKucReFfVSFGX9cNvhG+qlUI1WlB4ppF6KmIQ7
+c8351MtwrXBQuS6PehkMiS6WZ3Kol6Hzi8xP9FnUy/DlT33xH2ZSL4djX117
+dzr1clRWJCgizlMvR0h/q6A7jXo53Oz8l8Wcoz4axztvFw0rqY9GAT9Rq0g1
++v4LRxQC3w==
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 1.5207233826442346`},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 101.}, {1.532345605683223, 1.764790066462994}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.7181335745542088`*^9, 3.718133610840213*^9, 
+  3.718133730942645*^9, 3.718133863095344*^9, 3.718134035409319*^9, 
+  3.7181341030780888`*^9, 3.718134201235455*^9, 3.718134303544901*^9, 
+  3.718134471202118*^9, 3.718134662478285*^9, 3.7181347125578012`*^9, 
+  3.7181350513507442`*^9, 3.71813539948805*^9, 3.7181355818385477`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"normratio25", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{
+        RowBox[{"Length", "[", "normcoef25", "]"}], "-", "1"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"normratio25", ",", 
+        RowBox[{
+         RowBox[{"normcoef25", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", "+", "1"}], "]"}], "]"}], "/", 
+         RowBox[{"normcoef25", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Again", ",", " ", 
+     RowBox[{
+      RowBox[{"ratio", " ", "of", " ", "norms", " ", "is"}], " ", "<", " ", 
+      "1"}]}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Show", "[", 
+    RowBox[{"ListPlot", "[", "normratio25", "]"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.7181337482856483`*^9, 3.7181337624693947`*^9}, {
+  3.718135270405016*^9, 3.7181352763412533`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJw9yw1M1HUcx/G/WgfSA8aDu/Ugz8WIGgqEnMh9eJKn4+n+dxx0uZIUKHIY
+oVajcZuowNSIHZQiTAx02DUFxqEr4HaAQyal2U1xpGLiiHhUgjwConXf73/7
+7b/X7/N7e2TlK3etFgRh58r57///Ny3XLZ3p8r0wI7dd4Bf17M2t4oTN9hio
+n21dLJm0eR1e3/VIf7qT7AJLp+ni3cApm6VovZazueI98sswH87WD5ST3eEj
+S+rIOUX2RK0hafBqC9kbMXXF86Wd5FfhnfvxrYQ+si9OlhiP7f6Z7Ae/UMe6
+7RayP4rWLvQ63ia/CfOA3rzmDjkAexeNg/HD5I247x3vsv4BeROWcp4Z+PQh
+ORAF19bpy0fJQYiaCCrSjJGDUVU61Dr+J/kteEvfLlVOkEPwWUN3f8UkeTPG
+zMse30+RQ6HS7Cg3TJNlcK8rHa2cIW9BbEFM9fuPyGEIDyxL8XhM3opRS2Xe
+T+xwdMsq7n00S5bD8sbV7UtsoH21u1jyl806wFl1aGmZLESgfspQUDBHewSO
+NvbXDZGFSGwKrhLl87RHwr7NN66GLEQhPrnmlRneo2D+Jiwr4m/ao3G2wkt/
+hKyLxn4hz+sG7zEIvSgpdH1Cewyqb2XcFcnCNmywO9R2jPdt6K46EX6Z91i0
+x5T8YOU9FpckY9n+VtrjYDo/sldL1sUhx6tRWsp7PESPuc9beI+HNNjUc5v3
+BPQF5b+4aoH2BLx7IrXWhywkQnZgJC+O90RIx/1Of8C7Aor9g5llvCvw8E7t
+ubO8J0EuSTzXw3sSwosku+/xnoy1nnueXuA9GVe+7C1x+Yf2FHz446oFf7Iu
+Ba3aJ/uieU/FH6pCiZaMVIQ0RRv38PtUtLhqKw+STak4cH6w8Tj3abjZ7r1g
+4D4NfZaZmi7u0zD8QP3Vde7ToP3i+u/3uVeiIfOdmsfcK9Hflt+1ZpF6JRx6
+HTXOZJMSieKvuZ5kQcTxpmlrABki3C7LnOXci3CybmxXcC+i2frUeCb3KrxQ
++LUxm3sVdvgefukT7lVoPhPgVsy9Cj7ftvaWc6/G8PycUzX3akxpDA713K/s
+l8QL33GvRpku3M7IfTpCcyudTNynY1+YwnKF+3T0aCOVN7hPx9izrx0Z4l6D
+4abygyPca7Cl4TdMcq9Bx84C0xz3GlgdiiXL3Gdg4jk3V7sl6jPQaVJNPk/W
+ZSCrw0G/nmzKQHOIq/0GspCJAFmgwmfF/wJyCBrY
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0.9927691629851498},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 100.}, {0.9932829546129738, 1.003558787169454}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.7181336109026823`*^9, 3.718133731019103*^9, 
+  3.718133863172862*^9, 3.718134035488009*^9, 3.7181341031653547`*^9, 
+  3.718134201300522*^9, 3.718134303610169*^9, 3.718134471329708*^9, 
+  3.718134662550441*^9, 3.718134712603326*^9, 3.7181350514308434`*^9, 
+  3.718135399544475*^9, 3.718135581883416*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7180854429695463`*^9, 3.71808544775692*^9}, {
+  3.718085523551508*^9, 3.718085725209319*^9}, {3.7180857632423143`*^9, 
+  3.718085791641366*^9}, {3.718133316415042*^9, 3.718133358013061*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+    "**"}], "*****)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"lambda", " ", "at", " ", ".45"}], " ", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"alpha", "=", ".45"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"deltax", "=", ".1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"deltat", "=", ".01"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"lambda", "=", 
+     RowBox[{"alpha", "*", 
+      RowBox[{"deltat", "/", 
+       RowBox[{"deltax", "^", "2"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"A", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"inew", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"j", "=", "1"}], ",", 
+         RowBox[{"j", "\[LessEqual]", 
+          RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+         RowBox[{"++", "j"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"j", "\[Equal]", "i"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"inew", ",", 
+              RowBox[{"1", "-", 
+               RowBox[{"2", "*", "lambda"}]}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"j", "\[Equal]", 
+                 RowBox[{"i", "-", "1"}]}], "||", 
+                RowBox[{"j", "==", 
+                 RowBox[{"i", "+", "1"}]}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"inew", ",", "lambda"}], "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"inew", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+              "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"A", ",", "inew"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"toprow", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"i", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"toprow", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"toprow", ",", "0"}], "]"}]}], "\[IndentingNewLine]", "]"}],
+        ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"bottomrow", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"i", "\[Equal]", 
+          RowBox[{"Length", "[", "xvec", "]"}]}], ",", "\[IndentingNewLine]", 
+         
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"bottomrow", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"bottomrow", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+        "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"A", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "=", "toprow"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"A", "[", 
+      RowBox[{"[", 
+       RowBox[{"Length", "[", "xvec", "]"}], "]"}], "]"}], "=", "bottomrow"}],
+     ";"}], " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", "DFT", " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"M", " ", "=", " ", "101"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dftm", " ", "=", " ", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", " ", "=", "0"}], ",", " ", 
+      RowBox[{"k", " ", "\[LessEqual]", " ", 
+       RowBox[{"M", " ", "-", "1"}]}], ",", " ", 
+      RowBox[{"++", "k"}], ",", " ", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"row", " ", "=", " ", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", " ", "=", "0"}], ",", " ", 
+         RowBox[{"i", " ", "\[LessEqual]", " ", 
+          RowBox[{"M", "-", "1"}]}], ",", " ", 
+         RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"xi", " ", "=", " ", 
+           RowBox[{"2", "*", 
+            RowBox[{"Pi", "/", "M"}], " ", "*", " ", "i"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"row", ",", " ", 
+            RowBox[{"E", "^", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "I"}], "*", "k", "*", "xi"}], ")"}]}]}], 
+           "]"}]}]}], " ", 
+        RowBox[{"(*", " ", 
+         RowBox[{"using", " ", "negative", " ", "sign", " ", "here"}], " ", 
+         "*)"}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"dftm", ",", "row"}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dftm", "=", 
+     RowBox[{"Simplify", "[", "dftm", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dftm", "=", 
+     RowBox[{"dftm", "/", 
+      RowBox[{"Sqrt", "[", "M", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "uvectors", " ", "including", " ", "initial", " ", "state", " ", "and", 
+     " ", "next", " ", "100", " ", "time", " ", "steps"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uvectors", "=", 
+     RowBox[{"{", "uvec", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"uvec0", "=", "uvec"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "100"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"uvec0", "=", 
+        RowBox[{"A", ".", "uvec0"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"uvectors", ",", "uvec0"}], "]"}]}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "determining", " ", "Fourier", " ", "Coefficients", " ", "and", " ", 
+     "storing", " ", "vector", " ", "of", " ", "coefficients", " ", "at", " ",
+      "each", " ", "time", " ", "step", " ", "in", " ", "a", " ", "vector"}], 
+    " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fourcoef", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "uvectors", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"fourcoef", ",", 
+        RowBox[{"dftm", ".", 
+         RowBox[{"uvectors", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "extracting", " ", "element", " ", "twenty", " ", "five", " ", "from", 
+     " ", "each", " ", "coefficient", " ", "vector", " ", "in", " ", 
+     "fourcoef"}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{"coef25", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "fourcoef", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"coef25", ",", 
+        RowBox[{
+         RowBox[{"fourcoef", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "25", "]"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "finding", " ", "norm", " ", "of", " ", "above", " ", "coefficient", " ", 
+     "at", " ", "each", " ", "time", " ", "step"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"normcoef25", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", 
+       RowBox[{"Length", "[", "coef25", "]"}]}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"normcoef25", ",", 
+        RowBox[{"Norm", "[", 
+         RowBox[{"coef25", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"ListPlot", "[", "normcoef25", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.718089186468624*^9, 3.7180891894222193`*^9}, {
+  3.718133792374997*^9, 3.7181338244955072`*^9}, {3.71813398643049*^9, 
+  3.71813398763942*^9}, {3.718135015171126*^9, 3.718135017943864*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJw1iwlM02cYhxlHQOWaCjqBZDAiRaS6WlDssD9oKXJKL1rFTBSQaFDWIIfB
+oYICFihX5kGBRTaIDDbd0hFFGCASSOdIGHLMVcANZIKJiLJyCM7F//slb748
+7/M+rkeSJQmmJiYmCe/m///9m+F7snt4yqG3fGYBvVtq+PG5D/AeraC2lWQ8
+zCJvj3/yBPmG0BWG1+Ow2fGGzsU3DG9EiXtIGktF7IzXLK+xyZElhj+GXmTZ
+rtUQu6FKVfOgiEfsDpe8PdtazIk3Y3jTtstOvYsMsyCxy5kqryXegjEXgVtY
+FvFWqF3Yzv2fE7MxviG9aAjE2/H7eEyTxoP4U3TkPui5ZUfMQUG218zQ4gLD
+O5Bbf82UP0nMRZrPykbdALEPihutbXd3EfvC1aX0h51NxDvh+7xrbtMN4l24
+Ve/S7KAl9sPTtQr7Pg3xbsz6swrjcoh5iDGcaruSQfwZqm1aI9JOEvvDQ1mC
+x/HEexDkLA7sjSHmI240dp4jJQYq/pi7syqM4XOA2cHvgwUC8gFo5FUVGHjk
+A3DwV8c2PZd8IFQDqYrVbPKBGPvtREq5B3kBTHlPio64khcgoUKqUzmRF6Kb
+O1Hd6kBeCG5s5c0Ae/JB8E41e7m4mnwQ0nMamiYsyIsgfCI7/NaEvAgQGF8L
+38wzPhg2Pk7uOiPD54LBWeeYHvqK/F5IHGKnLF6Q3wsb9Yak8SnyIQiPH/Qb
+f0o+BGvW/lxq9jf5UHDaHj/DKPlQ5Bcmt1f8ST4M3kvyFrth8mE4OnG/uPoh
++XD0s9VrRH3kwyE26K0teslHoPnLkPxHevIReL6wlNXVTT4SDRK1edd98pHw
+erV+13AH+X24FDkSvPIL+X3462Vtkm8L+Sj0X6ibPnuHYURBiIJ1j5ro/h33
+pfgLdQy3R4G/Y1rf+iP1YvzLjtksukm9GJc1dR2GRurFSFoJdTz/HfViJJ6I
+/5Zzg3oJJg/VzM7UUi+Bzqek6O431Eugup5iWXadeglylu8ZU76mXorE5IXF
+2CrqpTC0b/1JqaVeioHAkXsHrlEvhV1P3eDRK9TLEPWJlfbMV9TL0PeRZ4e2
+nHoZnqXVL3eWUi/Di8FjVnPF1MuxnRtXydZQLwfndnr6F4XUy6FdFXmgWU29
+HIe2eFpZX6I+GrkZ3aKEPOqjIWVjpOsi9dEwGiauel+gPhoD2SxBZTb1CiRy
+Mxs+PE+9AtPLfjVFZ6lXIPNY2YJdFvUKGDVJF6+eoV4JlUe0k0cm9UqYR50s
+u3uaeiVuj0o65RnUKyE/bZs/l0b9fhSMWbZUpFK/H71Ws7ygU/P8/wAD/vis
+
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 1.517539515892984},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 101.}, {1.5283863393420236`, 1.7453228083228127`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.718133864727558*^9, 3.718134036835588*^9, 
+  3.718134104527267*^9, 3.718134202645372*^9, 3.7181343049802322`*^9, 
+  3.718134472633626*^9, 3.71813466390926*^9, 3.718134713883052*^9, 
+  3.718135052744299*^9, 3.7181354008923693`*^9, 3.718135583196802*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"normratio25", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{
+       RowBox[{"Length", "[", "normcoef25", "]"}], "-", "1"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"normratio25", ",", 
+       RowBox[{
+        RowBox[{"normcoef25", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", "+", "1"}], "]"}], "]"}], "/", 
+        RowBox[{"normcoef25", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Show", "[", 
+   RowBox[{"ListPlot", "[", "normratio25", "]"}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"ratio", " ", "of", " ", "norms"}], " ", "<", " ", "1"}], 
+   "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.718133883262548*^9, 3.7181339264115562`*^9}, {
+  3.7181353014427137`*^9, 3.7181353073943453`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJw9y39Q03Ucx/Ev0oRigCE27KINEPkRci4xhFReY/wUBhtjPwA9D4yD9Lxx
+2YpMbRqH/QRNKSo5JAQxLKf/ZHIgUpx2wSDyMp3luTryYAzkl0IQ2cX7/b37
+3Pcen9fnGVRkyileIgjCS4/Of///v7GEnbb5PKN4PGHxAu0TbqNmX+eiPZG4
+IHNfedW16GVI+8pHPHWC7I+ROFOkd+noogOwyyv/yp4C8jPYN52qsTWSZQiN
+/8m7qp4cjG7biuaay+RVuPGmbImKvRqHvwu31PWRw1F5/gf7QD85EsUjXpXz
+N8lReC7g81t1dnI0uuM70qPvktfCHhZT0eMgy6G8c1hUMkh+Hupn179z+y/y
+OpwNkkhyh8gxeNhq3frJMHk9Pi6s/XHrCPkFlM8r2kwuciz6ezzPdI2SN+Ck
+b5lv6xg5Dtph+/Lz98nxMEwdspjHyS+iqfyPa8kT5I0wn7qpc7I3wdmwvaNm
+krwZ34aoz4ZMkROweZv0KSsbyJjzvxIxvWgLMOY6N11PFhSIVFU5PR/QroBj
+j6N9N1lIhN2t+vdrvCei4N7VHulD2pV4d9prp4lsUUJZ2+DXxnsS7JUhYrcZ
+2pPgin1tt5IsJGMy1Jl6kPdktOSbXG28p2AhO2twnPcUlAQ+7hU2S3sqDOn6
+ECPZkoq92+Y6K3lPQ0LItO0C72l45fTP1tu8p2PWKil+7G/a09E99Is8kixs
+Qdyf1dIs3reg/XhoYRnvGRiPtrof5T0DIo/0NVbeM/GkpMXZy3smrhdFbB/i
+XYUb+R8eE83RrkJos7hBShayEOHdWLOB9yy8LX26Qs17NkTvqd4o4T0bXQNt
+Fft5V6P+oPuFj8hQIzBF5nOa36uhefn1xkvkTjU83vLZ38u9Bl1fhJ66w70G
+kTZ58H3uNWjqLV1wm6deg+CVs0o/spCDpK41D4LIyMG+M6tlcrIlB3m2/O4E
+7nOgPCYeUXGvhX/xzIkC7rVQuTXfKuVeiyJpdKuZey0c9leXH+I+F0d2eAZU
+cZ+LarGi/VPuc6GSyD2auM9F5sTFmXPc6/B+4oHaS9zr4FDNDH7PvQ7mgrJ7
+Nu518OsTTv7KvR4t4rplDu71uNvvt2mYez3cP3gifJJ7PfYOe12f496A/qUH
+lKJ/qDeg+psvy73JFgNSYi6bV5A7DTj+mW1jIFkwYrBjoG8V90bIw75eG8W9
+ERJXVOE67o3YZVy6I577PHhc/C1W8cj/Al8iDAg=
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0.9933285860447597},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 100.}, {0.9938022289166033, 1.0032750863534787`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.718133864904389*^9, 3.718134036895672*^9, 
+  3.718134104592412*^9, 3.718134202731245*^9, 3.718134305073311*^9, 
+  3.718134472750888*^9, 3.71813466399568*^9, 3.718134713996722*^9, 
+  3.7181350528662853`*^9, 3.718135400954103*^9, 3.71813558330205*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.718133065598377*^9, 3.718133085256784*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", 
+    "**"}], "*****)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"lambda", " ", "=", " ", "0.5"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.718133949155073*^9, 3.7181339770541697`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.718132286688971*^9, 3.718132305822001*^9}, 
+   3.7181323682112503`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"alpha", "=", ".50"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"deltax", "=", ".1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"deltat", "=", ".01"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"lambda", "=", 
+    RowBox[{"alpha", "*", 
+     RowBox[{"deltat", "/", 
+      RowBox[{"deltax", "^", "2"}]}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"A", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"inew", "=", 
+       RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"j", "=", "1"}], ",", 
+        RowBox[{"j", "\[LessEqual]", 
+         RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+        RowBox[{"++", "j"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"j", "\[Equal]", "i"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"inew", ",", 
+             RowBox[{"1", "-", 
+              RowBox[{"2", "*", "lambda"}]}]}], "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"j", "\[Equal]", 
+                RowBox[{"i", "-", "1"}]}], "||", 
+               RowBox[{"j", "==", 
+                RowBox[{"i", "+", "1"}]}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"inew", ",", "lambda"}], "]"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"inew", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+             "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"A", ",", "inew"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"toprow", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"i", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"toprow", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"toprow", ",", "0"}], "]"}]}], "\[IndentingNewLine]", "]"}], 
+      ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"bottomrow", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", 
+     RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+    RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"i", "\[Equal]", 
+        RowBox[{"Length", "[", "xvec", "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"bottomrow", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"bottomrow", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+      "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"A", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], "=", "toprow"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"A", "[", 
+     RowBox[{"[", 
+      RowBox[{"Length", "[", "xvec", "]"}], "]"}], "]"}], "=", "bottomrow"}], 
+   ";"}], " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", "DFT", " ", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"M", " ", "=", " ", "101"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dftm", " ", "=", " ", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", " ", "=", "0"}], ",", " ", 
+     RowBox[{"k", " ", "\[LessEqual]", " ", 
+      RowBox[{"M", " ", "-", "1"}]}], ",", " ", 
+     RowBox[{"++", "k"}], ",", " ", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"row", " ", "=", " ", 
+       RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", " ", "=", "0"}], ",", " ", 
+        RowBox[{"i", " ", "\[LessEqual]", " ", 
+         RowBox[{"M", "-", "1"}]}], ",", " ", 
+        RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"xi", " ", "=", " ", 
+          RowBox[{"2", "*", 
+           RowBox[{"Pi", "/", "M"}], " ", "*", " ", "i"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"row", ",", " ", 
+           RowBox[{"E", "^", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"-", "I"}], "*", "k", "*", "xi"}], ")"}]}]}], "]"}]}]}],
+        " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{"using", " ", "negative", " ", "sign", " ", "here"}], " ", 
+        "*)"}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"dftm", ",", "row"}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dftm", "=", 
+   RowBox[{"Simplify", "[", "dftm", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dftm", "=", 
+    RowBox[{"dftm", "/", 
+     RowBox[{"Sqrt", "[", "M", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "uvectors", " ", "including", " ", "initial", " ", "state", " ", "and", 
+    " ", "next", " ", "100", " ", "time", " ", "steps"}], " ", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"uvectors", "=", 
+   RowBox[{"{", "uvec", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"uvec0", "=", "uvec"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", "100"}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"uvec0", "=", 
+       RowBox[{"A", ".", "uvec0"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"uvectors", ",", "uvec0"}], "]"}]}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "determining", " ", "Fourier", " ", "Coefficients", " ", "and", " ", 
+    "storing", " ", "vector", " ", "of", " ", "coefficients", " ", "at", " ", 
+    "each", " ", "time", " ", "step", " ", "in", " ", "a", " ", "vector"}], 
+   " ", "*)"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fourcoef", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Length", "[", "uvectors", "]"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"fourcoef", ",", 
+       RowBox[{"dftm", ".", 
+        RowBox[{"uvectors", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "extracting", " ", "element", " ", "twenty", " ", "five", " ", "from", " ",
+     "each", " ", "coefficient", " ", "vector", " ", "in", " ", "fourcoef"}], 
+   " ", "*)"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"coef25", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Length", "[", "fourcoef", "]"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"coef25", ",", 
+       RowBox[{
+        RowBox[{"fourcoef", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "[", 
+        RowBox[{"[", "25", "]"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "finding", " ", "norm", " ", "of", " ", "above", " ", "coefficient", " ", 
+    "at", " ", "each", " ", "time", " ", "step"}], " ", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"normcoef25", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Length", "[", "coef25", "]"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"normcoef25", ",", 
+       RowBox[{"Norm", "[", 
+        RowBox[{"coef25", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", "normcoef25", "]"}]}], "Input",
+ CellChangeTimes->{{3.71813409681166*^9, 3.718134097843177*^9}, 
+   3.7181341929273767`*^9, 3.7181342981072073`*^9, {3.718135028443152*^9, 
+   3.7181350311228733`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJw1yw9M1GUAxnHAumlhw9KC4iwIGTSFI0BJju6B4/ivwMH9S1IU7rgA+dMV
+UEKcYoCETGihBkWB1nBGEGhIgHcMECSWKchQchCSxFaiNSLQrOY9v+3db5/3
++z5OezLlWhsrKyvtf+f//8NvXuLuMeCvHnsgsVzg4nGR2Fttg4dciYycxNk7
+uf9Yuh0SELDP9lF6LSrfuCO/kXjPYnvYumSfuQDaETpZ31ZBzrLFL8Cs0w+n
+62hnWAcVyNfMLVnsAn1U+568SdoVjUviBWMZ7QahZ33d9SL6JSxfkiQvSemN
++MJbfGWlhPZAfnTzfZ/VtAjumpT1mlW0FzSC4aBnp/62+GUst6T/sfwT7Y1y
+QUp3bSftg+TlkWJBB+0LD4nw0IVP6M0QZ++9UV1Db0Fv6cWpsCLaDz/rS5W6
+/fQruDR09Kx3Or0Vv0YG9Fek0v6Ilo44TqhoMV4PFPTolXQAxqqP3jfL6FcR
+/8i4ODeYlmCyJ/lMkS8N9MtOtbzmY7ERGPDX7xp1ZQ+EV5bINLCBPRDdixX3
+3nVgD8Lpb5yLi+3ZgzBfWZ4avJpdiojmTWeTbdmlmElYUfaYDXswfpTaXhFb
+swejKvNx0Vd/LVq6DLdcXT1vL1hslCHz290Na35nD0Gx0GDY/Rt7CG53FO5z
+mmEPhVCR/H7BTfZQHDtX1zc4wR4G577BZhFtDIMytSRhaYQ9HM/1uq9Io43h
+KBWbtSeH2SPQmXh8aD1tjEC77Ie57n72SMzVzviCNkYiZFVZidjEHoVr4xlL
+vefZo1AZ0ua2roN9G77TTgpPnGPfhu5W+zG0sW9H10ZR12gr+3Z8bTCUtzex
+R0M74zctp43R+LJgrV1OI3sMPpu9pV1HIwaaUyfHDSf4Pgbveb05+AxtioGD
+zcTi6TruYzFav9NNQSMWKq2TtbCG+1gc/iD3+cGPuY/FlEve4vlq7uVQNM12
+ZtKQo8nRJryqins5kjwXsmW0SY70z1vbjlRwH4ebU1cFoTTi0JB4OaK9jPs4
+lJnjjmTTpjgc/OXuTkEJ9/GorpnU9RRzH48Wh83784q4j8dMwPz6LbQpHk8c
++jDX1si9AjbXYg8MF3KvQFqtwM+Uz70Ch+UZZUW0SYGUp/OnK9/hXol5nXSH
+ioYSV2VJ5sIc7pV4scRKEkqblNjw1JB/qYF7FbIub6qPpaHCWw8Wrjdmca/C
+7Kfhdm/TJhU+2rUjdHov92qobL8XNdNQo7rzrtg7jXs1DnYd6LWmTWqYsyar
+jum51yDlT78GPQ0NspOUPk/qFiX/An6F9M8=
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 1.5149373387098393`},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 101.}, {1.5249197048599081`, 1.7245670278612895`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.718134038388101*^9, 3.718134106300296*^9, 
+  3.718134213463743*^9, 3.718134306501231*^9, 3.718134474060297*^9, 
+  3.718134665359735*^9, 3.71813471530204*^9, 3.718135054205399*^9, 
+  3.718135402325141*^9, 3.718135584662814*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.71813262682559*^9, 3.71813265333473*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"normratio25", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{
+       RowBox[{"Length", "[", "normcoef25", "]"}], "-", "1"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"normratio25", ",", 
+       RowBox[{
+        RowBox[{"normcoef25", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", "+", "1"}], "]"}], "]"}], "/", 
+        RowBox[{"normcoef25", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Show", "[", 
+   RowBox[{"ListPlot", "[", "normratio25", "]"}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "ratio", " ", "of", " ", "norms", " ", "is", " ", "less", " ", "than", 
+     " ", "1"}], ",", " ", 
+    RowBox[{
+    "but", " ", "erractic", " ", "behavior", " ", "is", " ", "beginning", " ",
+      "to", " ", "appear"}]}], " ", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.718134383614832*^9, 3.7181343976994743`*^9}, {
+  3.718135321467268*^9, 3.7181353409286957`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJw91H9M1HUcx3F+CP2YlDqaibX8cQsQDqgzUn7dS47jQH7d7ztZNkYCUvxI
+6sCYrgN/HtIkGDHEFE+vc2yaaRd4k4KDgDBp1EyaIEHTFA3IjO4QMFv3ft/2
+3Xev72PPf777fG91drEyx8vDw2Pb4+u/+/+/aXFm5NPvHC++L3Y/gHAssXVp
+3YR7P4nYjWUC9YEp916C4dQmQQAm3dsf80rZ4sHr5M8j7NOgzswA2i/ANSyr
+/PEP2qugrv7Qq7uI9hpYw1UDnzygLcBdQfIRSyPtlzFUP2if+4d2EGp9Wu79
+fp72OixTV6yaddEOxYaPf7os7qIdhrdMp2riH9KOwI6UJ/SmAdqv4KXoG2OC
+Odqvoty0R9r6M20RBNPm5j729Xi7QNA1Mkz7NXiWzh2VzNOOxGVdzq/NY7Rf
+x/ueeoeZfQOy6u/V5d2kvRETmQ8CJ9mj4Gkayjfcph0NqyMrIGSBdgxKVWl6
+5wTtWKwsKBNtZY9DZGzJsSX8vsVYlqN07WcH1q4INFyddG8jEFxxNaaFfRPq
+XeMzumnyTbj2dZC6jz0eijMRc6f+JI/HOdlqjLNLYMod0fTcJ5dgdPfNbid7
+Avp7DSe6/iJPwLO5deWLH5FL8WZh3LCZzoNRioWDjqEX2RNRWHm7f/vf5IkQ
+xpyIE7LLcFKxNGHFDLkM73n3OaPYkxC+15Lbyp6EhisfSGXsyahpDHFI6bwZ
+kxHX/Z1Oyb4Zt/K8DT3sm5G6yLnlDfYUjNqyJdFO8hSMe8QW57CnYofh0WkL
+eyqOFK+zFbKnYeei3lu+dJ6NaQiLak8wsKfjh6pjflns6cgXrhftYs9A3tHf
+fM+zZ6DGdrG2kl2Oh5dETfPkkEMjvFtykNwox7bvb5RJZt27Q46zh6VjH3Gv
+gE9RhmgvORTQ5u++U8u9AvZ0s7yDewV2lffUN3CvxAVHQ7yTeyVchc9MNXGv
+RLjYsyiUvtcOJRQS4fxx7lUoa+sO2UoOFawlfr0nuVdhBFX9VdyrMJF9RWnl
+Xo22mbU1Nu7VuPjudUsL92ooZi/ZR7hX4/Q+v2/PcK/BQt0vFd70fwANGp+y
+fXmOew2iv4hYHkjeoYFo8POdF7jXIiktx5rEvRZj1aX+X3GvxeGVlszt3Gvh
+vyb4UBv3OhwYiNDs514HX1njqJ17HezVg61m7nUo/0zl3869Hsv3xDW3c69H
+Z6815Bvu9VB4GYKvca/HvjtnAzu534LnQn0Kph77vyiyF5k=
+      
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0.9941013231799042},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 100.}, {0.9945342313390289, 1.0031923945215266`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.718134038571851*^9, 3.718134106534236*^9, 
+  3.7181342136328917`*^9, 3.718134306580246*^9, 3.7181344742138767`*^9, 
+  3.718134665445533*^9, 3.71813471541814*^9, 3.718135054294589*^9, 
+  3.718135402443797*^9, 3.71813558478332*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.718132655626216*^9, 3.718132655633623*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**",
+     "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**", "**"}],
+    "*****)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"lambda", "=", ".55"}], "*)"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.718134057526272*^9, 3.718134078258748*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"alpha", "=", ".55"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"deltax", "=", ".1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"deltat", "=", ".01"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"lambda", "=", 
+    RowBox[{"alpha", "*", 
+     RowBox[{"deltat", "/", 
+      RowBox[{"deltax", "^", "2"}]}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"A", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"inew", "=", 
+       RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"j", "=", "1"}], ",", 
+        RowBox[{"j", "\[LessEqual]", 
+         RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+        RowBox[{"++", "j"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"j", "\[Equal]", "i"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"inew", ",", 
+             RowBox[{"1", "-", 
+              RowBox[{"2", "*", "lambda"}]}]}], "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"j", "\[Equal]", 
+                RowBox[{"i", "-", "1"}]}], "||", 
+               RowBox[{"j", "==", 
+                RowBox[{"i", "+", "1"}]}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"inew", ",", "lambda"}], "]"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"inew", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+             "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"A", ",", "inew"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"toprow", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"i", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"toprow", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"toprow", ",", "0"}], "]"}]}], "\[IndentingNewLine]", "]"}], 
+      ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"bottomrow", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", 
+     RowBox[{"Length", "[", "xvec", "]"}]}], ",", 
+    RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"i", "\[Equal]", 
+        RowBox[{"Length", "[", "xvec", "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"bottomrow", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"bottomrow", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+      "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"A", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], "=", "toprow"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"A", "[", 
+     RowBox[{"[", 
+      RowBox[{"Length", "[", "xvec", "]"}], "]"}], "]"}], "=", "bottomrow"}], 
+   ";"}], " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", "DFT", " ", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"M", " ", "=", " ", "101"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dftm", " ", "=", " ", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"k", " ", "=", "0"}], ",", " ", 
+     RowBox[{"k", " ", "\[LessEqual]", " ", 
+      RowBox[{"M", " ", "-", "1"}]}], ",", " ", 
+     RowBox[{"++", "k"}], ",", " ", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"row", " ", "=", " ", 
+       RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", " ", "=", "0"}], ",", " ", 
+        RowBox[{"i", " ", "\[LessEqual]", " ", 
+         RowBox[{"M", "-", "1"}]}], ",", " ", 
+        RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"xi", " ", "=", " ", 
+          RowBox[{"2", "*", 
+           RowBox[{"Pi", "/", "M"}], " ", "*", " ", "i"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"row", ",", " ", 
+           RowBox[{"E", "^", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"-", "I"}], "*", "k", "*", "xi"}], ")"}]}]}], "]"}]}]}],
+        " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{"using", " ", "negative", " ", "sign", " ", "here"}], " ", 
+        "*)"}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"dftm", ",", "row"}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dftm", "=", 
+   RowBox[{"Simplify", "[", "dftm", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dftm", "=", 
+    RowBox[{"dftm", "/", 
+     RowBox[{"Sqrt", "[", "M", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "uvectors", " ", "including", " ", "initial", " ", "state", " ", "and", 
+    " ", "next", " ", "100", " ", "time", " ", "steps"}], " ", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"uvectors", "=", 
+   RowBox[{"{", "uvec", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"uvec0", "=", "uvec"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", "100"}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"uvec0", "=", 
+       RowBox[{"A", ".", "uvec0"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"uvectors", ",", "uvec0"}], "]"}]}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "determining", " ", "Fourier", " ", "Coefficients", " ", "and", " ", 
+    "storing", " ", "vector", " ", "of", " ", "coefficients", " ", "at", " ", 
+    "each", " ", "time", " ", "step", " ", "in", " ", "a", " ", "vector"}], 
+   " ", "*)"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fourcoef", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Length", "[", "uvectors", "]"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"fourcoef", ",", 
+       RowBox[{"dftm", ".", 
+        RowBox[{"uvectors", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "extracting", " ", "element", " ", "twenty", " ", "five", " ", "from", " ",
+     "each", " ", "coefficient", " ", "vector", " ", "in", " ", "fourcoef"}], 
+   " ", "*)"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"coef25", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Length", "[", "fourcoef", "]"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"coef25", ",", 
+       RowBox[{
+        RowBox[{"fourcoef", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "[", 
+        RowBox[{"[", "25", "]"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "finding", " ", "norm", " ", "of", " ", "above", " ", "coefficient", " ", 
+    "at", " ", "each", " ", "time", " ", "step"}], " ", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"normcoef25", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{"Length", "[", "coef25", "]"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"normcoef25", ",", 
+       RowBox[{"Norm", "[", 
+        RowBox[{"coef25", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", "normcoef25", "]"}]}], "Input",
+ CellChangeTimes->{{3.718134448320619*^9, 3.718134448513082*^9}, {
+  3.718135042961069*^9, 3.718135046222169*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJw10wkwnHccxvF1JkoVNY5JRJFxJKpxLSF4HCGOsJe1tJWpo60QoqTdDM2I
+o4qWqGuGKkNp2qp2ERVnkVF3CUJIabSqoYkIURKSav3endnZefbzfmd3/++s
+XkgML1yaxWKF7z7/e917PHQyMeu1F00+d6I3UNC1qF/SKY29uR9reMvnnSM7
+5CrocG0fm1N5RlsdnKOizJzKp7S1YO3gpr4UvE37IB58YyHkTD2h/QoGCze/
+/PAz5np91PrIHvAVMH4YNkuDozcPMG4I47zcgKXVLdrGqFoJGv94lLn+CF7l
+SdhT5YybwtD1dc33Khk3w4LO3XYHEePHsJjtXp+Sybg5zpZ9N+usxrgFkhdW
+1FmpjFuirCJ1xaF/k7YV+J9uNHTkMG4NGX1fy8kExtlI8Kw5X/o94za4UHf2
+zTh9xm1RvpF1LnqR8eMwXLa5c6vpH9p2aKho0wtwYH6/PcY2uMfmbRk/AbPo
+26riZsYdYBRt2ZRcskHbEctZv/RJRzHn7wS7aTb30O3HtIEqb+7sZBjdzySg
+M1tVaLm8Tu6MvoqJgjsddH+TnKHrKCnaHlkjd4EXpyWmnMvCnrsgKCP5UnrJ
+I3JXfBW1OSOukCJ3Rc9V9vBs5iq5G+R6W0uPi2XI3ZCgdiJXxYPxk2ifqV23
+2idPfhJhwz021i8xn++OdImxkmmRArk7mltN1wYEzPl64I2umLGRDGVyD7Au
+GivxFen7sE5Bx+KTxL8lauSnEKsemfZuwX5yT2hMTCRvRWmSe0LJeGvgWqMq
+uRc8x1uF5as65F5YtzZxWvHWJvfGR9enXp6MNyD3hn2dUGv4Dz1yH7wfqrhU
+XWZC7gNlv6llL13arNNIka+WZL1oTn4a1mbPtjgZtFm+0LpvIFv8O5vcF2Hz
+4nuPQmzJ/SDndr7S/r4juR/cq/f1Ft4DOQcW3QZmv+2e8/8THBi5zGX/HOlB
+13Og3bc6LV3ts7d/4iAjNCJMxYpDPRdGLcFGQ8V86rk4o+kXWxMhpJ6Lq11D
+fgf/CqKeC4sBJdl51hnqefjxg+Ab45dDqOch//prXzjHhVPPA6e1uTo+OYJ6
+HrK781nmdeeo52OnX1PR5/NY6vk49HA2PSM3nno+0lxDNUYDxdTz0ZjLa7BO
+SaReAOUx36HMmSTqBdgxiL0715NCvQBjvMHto8Hp1AuwqZzS3xifRb0/Hmcr
+lH/LvkK9P5zKDXQr1fKo90e+JC4tIa2Qen/crOdd6U4tpl6IwtnSmmm/MuqF
+kHvhYptMXAX1Qsi7COyU+qqoF+7+X+vVxT98TX0AkjTeFjcIa6kPQEf38+1f
+FyTUByDWqj5c9/A16gNgM/Fn0cB6E/Ui3Hran6Of2Ea9CNF9l7q1IzqpF0FK
+JiTKNO8G9SIMWepoLvr2Uh8IqwsKyd0tg9QHIvLBZamRJyP4F53n1Dc=
+      
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 101.}, {0, 2194.040791556013}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.718134475521614*^9, 3.718134666812127*^9, 
+  3.7181347167341337`*^9, 3.71813505559706*^9, 3.718135403789523*^9, 
+  3.718135586121606*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"normratio25", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "1"}], ",", 
+     RowBox[{"i", "\[LessEqual]", 
+      RowBox[{
+       RowBox[{"Length", "[", "normcoef25", "]"}], "-", "1"}]}], ",", 
+     RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"normratio25", ",", 
+       RowBox[{
+        RowBox[{"normcoef25", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", "+", "1"}], "]"}], "]"}], "/", 
+        RowBox[{"normcoef25", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Show", "[", 
+   RowBox[{"ListPlot", "[", "normratio25", "]"}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"We", " ", "have", " ", "broken", " ", 
+    RowBox[{"it", "."}]}], " ", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.718134584773829*^9, 3.7181346513522882`*^9}, {
+  3.718135356836685*^9, 3.718135360220277*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.009166666666666668], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJw90w1Q03Ucx/EhmFJcYXGIIZ6goCHYBHnU2EeQZ5CxwcYgJQjoUG48HHgg
+BOtIOQS9KMK8oKBExI4bzuMgw+PpOJBLHpSHGGuJqRsgwTIIRmF0/L7sbrf7
+7vV/77////f7W8enChI3cTichLX3/5/rr3leeoen5tL4nzz2BWrvPOI6T2rZ
+vBXenba2qfnzbDbFK3NN082nZ9lshrMzWZ5ZKeQWUKyOqqX+f7B5JywlutFF
+KfluGPRzGpovk9vAtG9S7pVDvhdftpVNiKrJ7aBY1oZpisn342ZDxTvp5eT2
+KPY5mpdRQ+6AtOhCnk0G+UHoVz6IkXSQc3G3z2As2pP8EF7e6Y1dnCF3wtmE
+lT71NF2fM3qju/W39+rYfBiC8Lb5gwXkLsj/zPRMShq5K4zdpbzu+edsdkO2
+tK/RaJTcHZW8HgsrN3IP3PWQxJ2KpfvviWHNTumA/wybj6Ah/kDf4Nsv2HwU
+2VX7zc23T7P5Pey4MWKbZfUXm71Q3PrwgddVWj8ezmgcPG5cWGAzkHho+tfV
+7mfrswxw0ZYFaD79m/kx2HPFSSHfPmF+DHm1YyO20Xrm3nBUxsdlej1m7g2P
+1h/tGoWrzH3wjeMFY4eR35j7wHj8YeNyhwHW/TjqjMdj5Ikq5schtlMMuyYZ
+MffFT/lW8gX5BPO1OaJouDx3M3M/VJwLrp1MUTP3g2VuYf1zM+r9IVPPldmr
+Jpn7g3srWdhUSucPwFuZX1ccePUp8wB0pS2l7cmn/x+IIDfdD4VO7P7JAjGx
+bGNuZLLCPAgvG2/Lq7ay9ZEFQVU7a9BSucQ8GMUmJoo3pGx/yIIx8s9m7emp
+ReYhmGhp1Chi55iHQHJFXdPUQusTio/et57ancn2oywU3NzMj488pvU9Adcr
+kk1Lr7H9JDuB+nsG5wuCyMNgseu88pcC8jDMaiO/71XT/uHjVP/J17PHmIOP
+IeeqSy6fM5fx4ZnbYynawfZjOx9O5Z/o+mOoD4fdgKz+VhBzhKN/cPUrXxfq
+w1FaM5B2PZX6cBh2Lg/s2ti/AoTOtczHlFAvwLuHtYb7tlAvgNeFuAyXauoF
+eDNUWb1NT8+HEPKrI4b/yqkXImR7W5Wrjs0yITihKv6WVuqFaNfPaz+coT4C
+Zl0FYfxu6iMwVGKc1KqhPgLFKfe+KPuZ+ghkBvaIqp9SH4n40so44QPqIxE3
+o0yofEJ9JC5mfnd5eZT6SFxfGIw/Sc4R4f6Aas99JfUiOE7lS+s2ehEEzauF
+hmrqRRgvkhWGbZxfDOtrU4quR9SLka+KGXJ9Rr0YdT3Jbva/Uy9Gl85X4k/X
+x4nCtrycF8H0e4hC0TlVTrqW+igor5W4u9Px7VHwE/buuzlFvQTJ3M5g/drx
+/wEa+v0R
+      "]]}, {}}, {}, {}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 100.}, {0, 1.7258106779528957`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.7181344756432943`*^9, 3.718134666898612*^9, 
+  3.718134716848712*^9, 3.7181350557097597`*^9, 3.718135403906735*^9, 
+  3.718135586215065*^9}]
+}, Open  ]]
+},
+WindowSize->{803, 602},
+WindowMargins->{{Automatic, 108}, {Automatic, 41}},
+FrontEndVersion->"11.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
+10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 16769, 400, 2761, "Input",ExpressionUUID->"00499d10-64ba-4870-a501-2c5bdba121dd"],
+Cell[17352, 424, 4119, 77, 250, "Output",ExpressionUUID->"5d49bdec-a8e5-481a-9c97-b7004c66fd9d"]
+}, Open  ]],
+Cell[21486, 504, 201, 4, 30, "Input",ExpressionUUID->"4d2fd642-e3ab-4009-b4d1-f0584b5d9261"],
+Cell[CellGroupData[{
+Cell[21712, 512, 2038, 45, 262, "Input",ExpressionUUID->"cf417e44-a226-4c5f-959a-ff1190cbee0e"],
+Cell[23753, 559, 3982, 76, 241, "Output",ExpressionUUID->"5c6986e6-1ae2-4b09-8a0b-b422433fe801"]
+}, Open  ]],
+Cell[27750, 638, 152, 3, 30, "Input",ExpressionUUID->"1a8dbe83-20a2-4490-8616-750cec60a3d3"],
+Cell[CellGroupData[{
+Cell[27927, 645, 11136, 275, 2026, "Input",ExpressionUUID->"14797eb9-59df-4ec1-a8f5-d64a8cef1a67"],
+Cell[39066, 922, 3076, 61, 244, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42179, 988, 1274, 31, 222, "Input"],
+Cell[43456, 1021, 2957, 59, 243, "Output"]
+}, Open  ]],
+Cell[46428, 1083, 239, 3, 32, "Input"],
+Cell[CellGroupData[{
+Cell[46692, 1090, 10702, 266, 1944, "Input"],
+Cell[57397, 1358, 2991, 60, 244, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60425, 1423, 1161, 32, 180, "Input"],
+Cell[61589, 1457, 2906, 58, 239, "Output"]
+}, Open  ]],
+Cell[64510, 1518, 92, 1, 32, "Input"],
+Cell[64605, 1521, 502, 10, 75, "Input"],
+Cell[65110, 1533, 120, 2, 32, "Input"],
+Cell[CellGroupData[{
+Cell[65255, 1539, 9985, 263, 1860, "Input"],
+Cell[75243, 1804, 2942, 59, 244, "Output"]
+}, Open  ]],
+Cell[78200, 1866, 90, 1, 32, "Input"],
+Cell[CellGroupData[{
+Cell[78315, 1871, 1330, 36, 201, "Input"],
+Cell[79648, 1909, 2901, 59, 239, "Output"]
+}, Open  ]],
+Cell[82564, 1971, 92, 1, 32, "Input"],
+Cell[82659, 1974, 496, 10, 75, "Input"],
+Cell[CellGroupData[{
+Cell[83180, 1988, 9931, 262, 1860, "Input"],
+Cell[93114, 2252, 2964, 61, 239, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[96115, 2318, 1154, 31, 180, "Input"],
+Cell[97272, 2351, 2914, 60, 243, "Output"]
+}, Open  ]]
+}
+]
+*)
+

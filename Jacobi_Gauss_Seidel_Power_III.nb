@@ -1,0 +1,692 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     25554,        684]
+NotebookOptionsPosition[     24606,        660]
+NotebookOutlinePosition[     24963,        676]
+CellTagsIndexPosition[     24920,        673]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Gauss", " ", "Seidel", " ", "using", " ", "more", " ", "succinct", " ", 
+    "method"}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"constructing", " ", "matrix", " ", "A"}], " ", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"A", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "50"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"inew", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"j", "=", "1"}], ",", 
+         RowBox[{"j", "\[LessEqual]", "50"}], ",", 
+         RowBox[{"++", "j"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"j", "\[Equal]", "i"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"inew", ",", "0.5"}], "]"}], ",", "\[IndentingNewLine]", 
+            
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"j", "==", 
+                 RowBox[{"i", "-", "1"}]}], "||", 
+                RowBox[{"j", "==", 
+                 RowBox[{"i", "+", "1"}]}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"inew", ",", "0.25"}], "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"inew", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+              "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"A", "=", 
+        RowBox[{"Append", "[", 
+         RowBox[{"A", ",", "inew"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"constructing", " ", "vector", " ", "b"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"b", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "50"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"b", ",", 
+        RowBox[{"1", "/", "i"}]}], "]"}]}], "\[IndentingNewLine]", "]"}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"constructing", " ", "Matrix", " ", "L"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"L", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "50"}], ",", 
+      RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"inew", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"j", "=", "1"}], ",", 
+         RowBox[{"j", "\[LessEqual]", "50"}], ",", 
+         RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"j", "\[LessEqual]", "i"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"inew", ",", 
+              RowBox[{
+               RowBox[{"A", "[", 
+                RowBox[{"[", "i", "]"}], "]"}], "[", 
+               RowBox[{"[", "j", "]"}], "]"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"inew", ",", "0"}], "]"}]}], "\[IndentingNewLine]", 
+           "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"L", "=", 
+        RowBox[{"Append", "[", 
+         RowBox[{"L", ",", "inew"}], "]"}]}]}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "find", " ", "L", " ", "inverse", " ", "using", " ", "forward", " ", 
+     "substitution"}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"iden", "=", 
+     RowBox[{"IdentityMatrix", "[", "50", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Linv", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"j", "=", "1"}], ",", 
+      RowBox[{"j", "\[LessEqual]", "50"}], ",", 
+      RowBox[{"++", "j"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"j", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"Linv", ",", 
+           RowBox[{
+            RowBox[{"iden", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "/", 
+            RowBox[{
+             RowBox[{"L", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"Linv", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"1", "/", 
+              RowBox[{
+               RowBox[{"L", "[", 
+                RowBox[{"[", "j", "]"}], "]"}], "[", 
+               RowBox[{"[", "j", "]"}], "]"}]}], ")"}], "*", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"iden", "[", 
+               RowBox[{"[", "j", "]"}], "]"}], "-", 
+              RowBox[{"Sum", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"L", "[", 
+                   RowBox[{"[", "j", "]"}], "]"}], "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "*", 
+                 RowBox[{"Linv", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "1", ",", 
+                  RowBox[{"j", "-", "1"}]}], "}"}]}], "]"}]}], ")"}]}]}], 
+          "]"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"constructing", " ", "matrix", " ", "U"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"U", "=", 
+     RowBox[{"UpperTriangularize", "[", "A", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "50"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"j", "=", "1"}], ",", 
+         RowBox[{"j", "\[LessEqual]", "50"}], ",", 
+         RowBox[{"++", "j"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"j", "\[Equal]", "i"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"U", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "[", 
+              RowBox[{"[", "j", "]"}], "]"}], "=", "0"}], ","}], 
+           "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+        "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "finding", " ", "actual", " ", "solution", " ", "using", " ", "built", 
+     " ", "in", " ", "LinearSolve", " ", "function"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"xTrue", "=", 
+     RowBox[{"LinearSolve", "[", 
+      RowBox[{"A", ",", "b"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"initializing", " ", "x"}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"x", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "50"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"x", ",", "1"}], "]"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Gauss", "-", 
+     RowBox[{
+     "Seidel", " ", "method", " ", "with", " ", "50", " ", "iterations"}]}], 
+    " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "50"}], ",", 
+      RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"x", "=", 
+        RowBox[{"Linv", ".", 
+         RowBox[{"(", 
+          RowBox[{"b", "-", 
+           RowBox[{"U", ".", "x"}]}], ")"}]}]}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "calculating", " ", "relative", " ", "normed", " ", "error", " ", "for", 
+     " ", "50", " ", "iterations"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"n", "=", "50"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"numeratorRelNormError", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "n"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"numeratorRelNormError", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"xTrue", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "-", 
+           RowBox[{"x", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "^", "2"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"numeratorRelNormError", "=", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"Total", "[", "numeratorRelNormError", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"denominatorRelNormError", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "n"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"denominatorRelNormError", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"xTrue", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ")"}], "^", "2"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"denominatorRelNormError", "=", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"Total", "[", "denominatorRelNormError", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"relNormError", "=", 
+     RowBox[{"numeratorRelNormError", "/", "denominatorRelNormError"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<The relative normed error for 50 iterations is approximately \>\"", 
+      ",", 
+      RowBox[{"N", "[", 
+       RowBox[{"relNormError", ",", "6"}], "]"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Gauss", "-", 
+     RowBox[{
+     "Seidel", " ", "method", " ", "with", " ", "500", " ", "iterations"}]}], 
+    " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"x", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "50"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"x", ",", "1"}], "]"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "500"}], ",", 
+      RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"x", "=", 
+        RowBox[{"Linv", ".", 
+         RowBox[{"(", 
+          RowBox[{"b", "-", 
+           RowBox[{"U", ".", "x"}]}], ")"}]}]}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "calculating", " ", "relative", " ", "normed", " ", "error", " ", "for", 
+     " ", "500", " ", "iterations"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"n", "=", "50"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"numeratorRelNormError", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "n"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"numeratorRelNormError", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"xTrue", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "-", 
+           RowBox[{"x", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "^", "2"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"numeratorRelNormError", "=", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"Total", "[", "numeratorRelNormError", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"denominatorRelNormError", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "n"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"denominatorRelNormError", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"xTrue", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ")"}], "^", "2"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"denominatorRelNormError", "=", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"Total", "[", "denominatorRelNormError", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"relNormError", "=", 
+     RowBox[{"numeratorRelNormError", "/", "denominatorRelNormError"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<The relative normed error for 500 iterations is approximately \>\"",
+       ",", 
+      RowBox[{"N", "[", 
+       RowBox[{"relNormError", ",", "6"}], "]"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Gauss", "-", 
+     RowBox[{
+     "Seidel", " ", "method", " ", "with", " ", "5000", " ", "iterations"}]}],
+     " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"x", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "50"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"x", ",", "1"}], "]"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "5000"}], ",", 
+      RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"x", "=", 
+        RowBox[{"Linv", ".", 
+         RowBox[{"(", 
+          RowBox[{"b", "-", 
+           RowBox[{"U", ".", "x"}]}], ")"}]}]}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "calculating", " ", "relative", " ", "normed", " ", "error", " ", "for", 
+     " ", "5000", " ", "iterations"}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"n", "=", "50"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"numeratorRelNormError", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "n"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"numeratorRelNormError", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"xTrue", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "-", 
+           RowBox[{"x", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "^", "2"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"numeratorRelNormError", "=", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"Total", "[", "numeratorRelNormError", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"denominatorRelNormError", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "n"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"denominatorRelNormError", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"xTrue", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ")"}], "^", "2"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"denominatorRelNormError", "=", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"Total", "[", "denominatorRelNormError", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"relNormError", "=", 
+     RowBox[{"numeratorRelNormError", "/", "denominatorRelNormError"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<The relative normed error for 5000 iterations is approximately \
+\>\"", ",", 
+      RowBox[{"N", "[", 
+       RowBox[{"relNormError", ",", "6"}], "]"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sr", "=", 
+     RowBox[{"Max", "[", 
+      RowBox[{"Abs", "[", 
+       RowBox[{"Eigenvalues", "[", 
+        RowBox[{
+         RowBox[{"IdentityMatrix", "[", "50", "]"}], "-", 
+         RowBox[{"Linv", ".", "A"}]}], "]"}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<The spectral radius of I-BA is approximately \>\"", ",", "sr"}], 
+     "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+     "using", " ", "Power", " ", "Method", " ", "to", " ", "find", " ", 
+      "spectral", " ", "radius", " ", "of", " ", "I"}], "-", "LinvA"}], " ", 
+    "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"eig", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "50"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"eig", ",", "1"}], "]"}]}], "\[IndentingNewLine]", "]"}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "\[LessEqual]", "5000"}], ",", 
+      RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"eig1", "=", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"IdentityMatrix", "[", "50", "]"}], "-", 
+           RowBox[{"Linv", ".", "A"}]}], ")"}], ".", "eig"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"large", "=", 
+        RowBox[{"Max", "[", "eig1", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"eig", "=", 
+        RowBox[{"eig1", "/", "large"}]}], ";"}]}], "\[IndentingNewLine]", 
+     "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"c", "=", 
+     RowBox[{"Abs", "[", 
+      RowBox[{"Max", "[", "eig1", "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<The spectral radius of I-LinvA using the Power Method is \
+approximately \>\"", ",", "c"}], "]"}], ";"}], " ", 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.714749063131259*^9, 3.714749135439101*^9}, {
+  3.714749194218285*^9, 3.71474922749562*^9}, {3.714749311063314*^9, 
+  3.714749447634933*^9}, {3.7147494824459877`*^9, 3.714749744342186*^9}, {
+  3.71474981079134*^9, 3.7147498844670057`*^9}, {3.714750136571802*^9, 
+  3.714750147413643*^9}, {3.714750181758677*^9, 
+  3.714750191499275*^9}},ExpressionUUID->"e4078bb7-e4ba-484e-b992-\
+800da4e844af"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The relative normed error for 50 iterations is approximately \
+\"\>", "\[InvisibleSpace]", "0.6438615539153656`"}],
+  SequenceForm[
+  "The relative normed error for 50 iterations is approximately ", 
+   0.6438615539153656],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.714749886291387*^9, {3.714750142061022*^9, 3.714750149411578*^9}, 
+   3.714750195339506*^9},ExpressionUUID->"ca30df22-1a1a-4adf-8445-\
+9dd8548347b0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The relative normed error for 500 iterations is approximately \
+\"\>", "\[InvisibleSpace]", "0.11020043318116`"}],
+  SequenceForm[
+  "The relative normed error for 500 iterations is approximately ", 
+   0.11020043318116],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.714749886291387*^9, {3.714750142061022*^9, 3.714750149411578*^9}, 
+   3.714750195348805*^9},ExpressionUUID->"9d23a6a3-2b20-4f57-8947-\
+5a8a69b47ca6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The relative normed error for 5000 iterations is approximately \
+\"\>", "\[InvisibleSpace]", "4.1846816625555216`*^-9"}],
+  SequenceForm[
+  "The relative normed error for 5000 iterations is approximately ", 
+   4.1846816625555216`*^-9],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.714749886291387*^9, {3.714750142061022*^9, 3.714750149411578*^9}, 
+   3.714750195556011*^9},ExpressionUUID->"398f083d-a8d1-4730-874b-\
+728ef793ff3f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The spectral radius of I-BA is approximately \"\>", 
+   "\[InvisibleSpace]", "0.9962102548359643`"}],
+  SequenceForm[
+  "The spectral radius of I-BA is approximately ", 0.9962102548359643],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.714749886291387*^9, {3.714750142061022*^9, 3.714750149411578*^9}, 
+   3.714750195574458*^9},ExpressionUUID->"49a4e8e9-a7ac-4e54-b1ff-\
+30342e49e676"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The spectral radius of I-LinvA using the Power Method is \
+approximately \"\>", "\[InvisibleSpace]", "0.9962102548359679`"}],
+  SequenceForm[
+  "The spectral radius of I-LinvA using the Power Method is approximately ", 
+   0.9962102548359679],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.714749886291387*^9, {3.714750142061022*^9, 3.714750149411578*^9}, 
+   3.714750195822297*^9},ExpressionUUID->"3b9bffaf-4dd9-4b96-8d58-\
+e3ea1889d579"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{
+  3.7147491280272493`*^9},ExpressionUUID->"0b6ef5ad-aeeb-45e4-80f3-\
+a69a44761bab"]
+},
+WindowSize->{808, 602},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"11.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
+10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 21432, 563, 3538, "Input",ExpressionUUID->"e4078bb7-e4ba-484e-b992-800da4e844af"],
+Cell[CellGroupData[{
+Cell[22037, 589, 476, 11, 24, "Print",ExpressionUUID->"ca30df22-1a1a-4adf-8445-9dd8548347b0"],
+Cell[22516, 602, 474, 11, 24, "Print",ExpressionUUID->"9d23a6a3-2b20-4f57-8947-5a8a69b47ca6"],
+Cell[22993, 615, 489, 11, 25, "Print",ExpressionUUID->"398f083d-a8d1-4730-874b-728ef793ff3f"],
+Cell[23485, 628, 442, 10, 24, "Print",ExpressionUUID->"49a4e8e9-a7ac-4e54-b1ff-30342e49e676"],
+Cell[23930, 640, 496, 11, 24, "Print",ExpressionUUID->"3b9bffaf-4dd9-4b96-8d58-e3ea1889d579"]
+}, Open  ]]
+}, Open  ]],
+Cell[24453, 655, 149, 3, 52, "Input",ExpressionUUID->"0b6ef5ad-aeeb-45e4-80f3-a69a44761bab"]
+}
+]
+*)
+
