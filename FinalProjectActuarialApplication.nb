@@ -1,0 +1,1517 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     61196,       1509]
+NotebookOptionsPosition[     59452,       1456]
+NotebookOutlinePosition[     59865,       1474]
+CellTagsIndexPosition[     59822,       1471]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Generating", " ", "subscribertype", " ", "list", " ", "for", " ", "500", 
+    " ", "simulations"}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"p", "=", 
+     RowBox[{
+      RowBox[{
+      ".60", " ", "that", " ", "subscriber", " ", "will", " ", "be", " ", 
+       "low", " ", "risk", " ", "class", " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"Type", " ", "1"}], ")"}], ".", "  ", "\[IndentingNewLine]", 
+        "p"}]}], "=", 
+      RowBox[{
+       RowBox[{
+       ".30", " ", "that", " ", "subscriber", " ", "will", " ", "be", " ", 
+        "of", " ", "medium", " ", "risk", " ", "class", " ", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"Type", " ", "2"}], ")"}], ".", "\[IndentingNewLine]", 
+         "p"}]}], "=", 
+       RowBox[{
+       ".10", " ", "that", " ", "subscriber", " ", "will", " ", "be", " ", 
+        "of", " ", "high", " ", "risk", " ", "class", " ", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"Type", " ", "3"}], ")"}], ".", "\[IndentingNewLine]", 
+         "The"}], " ", "numbers", " ", "1"}]}]}]}], ",", " ", "2", ",", " ", 
+    RowBox[{
+    "3", " ", "are", " ", "appended", " ", "to", " ", "subscribertemp", " ", 
+     "according", " ", "to", " ", "risk", " ", 
+     RowBox[{"class", ".", "  ", "Subscribertemp"}], " ", "is", " ", "then", 
+     " ", "appended", " ", "to", " ", "the", " ", "subcribertype", " ", 
+     "list"}], ",", " ", 
+    RowBox[{"so", " ", "in", " ", "the", " ", "end"}], ",", " ", 
+    RowBox[{
+    "we", " ", "expect", " ", "subscribertype", " ", "to", " ", "be", " ", 
+     "a", " ", "list", " ", "of", " ", "500", " ", "entries"}], ",", " ", 
+    RowBox[{
+    "each", " ", "corresponding", " ", "to", " ", "kth", " ", "simulation"}], 
+    ",", " ", 
+    RowBox[{
+    "where", " ", "each", " ", "entry", " ", "in", " ", "subscribertype", " ",
+      "is", " ", "a", " ", "list", " ", "of", " ", "1000", " ", "entries", 
+     " ", "of", " ", 
+     RowBox[{"1", "'"}], "s"}], ",", 
+    RowBox[{
+     RowBox[{"2", "'"}], "s"}], ",", 
+    RowBox[{
+     RowBox[{"3", "'"}], 
+     RowBox[{"s", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"subscribertype", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ",", 
+      RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+      RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"subscribertemp", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+         RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"res", "=", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{"MultinomialDistribution", "[", 
+             RowBox[{"1", ",", 
+              RowBox[{"{", 
+               RowBox[{".60", ",", ".30", ",", ".10"}], "}"}]}], "]"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"res", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"subscribertemp", ",", "1"}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"res", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"subscribertemp", ",", "2"}], "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"subscribertemp", ",", "3"}], "]"}]}], 
+              "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+           "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"subscribertype", ",", "subscribertemp"}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.72128923572586*^9, 3.721289266310121*^9}, {
+  3.721289382170555*^9, 3.721289387675811*^9}, {3.7212898524119453`*^9, 
+  3.721289876684857*^9}, {3.721299370447019*^9, 3.721299672609624*^9}, {
+  3.721300348484475*^9, 3.721300376366653*^9}, {3.721345490142218*^9, 
+  3.721345509181561*^9}, {3.7217752047421227`*^9, 3.721775207127781*^9}, {
+  3.72177525153475*^9, 3.721775252691533*^9}},
+ ExpressionUUID -> "274811fe-6efb-41bb-bb3f-1292c14b2165"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "We", " ", "generate", " ", "the", " ", "total", " ", "amount", " ", 
+     RowBox[{"(", 
+      RowBox[{"in", " ", "cash"}], ")"}], " ", "of", " ", "claims", " ", 
+     "made", " ", "by", " ", "type", " ", "1", " ", "if", " ", "only", " ", 
+     "one", " ", "claim", " ", "is", " ", 
+     RowBox[{"made", ".", "  ", "Note"}], " ", "that", " ", "these", " ", 
+     "values", " ", "are", " ", "only", " ", "used", " ", "if", " ", 
+     RowBox[{
+      RowBox[{"subscribertype", "[", 
+       RowBox[{"[", "k", "]"}], "]"}], "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", "is", " ", "Type", " ", "1", " ", 
+     "and", " ", "they", " ", "make", " ", "one", " ", 
+     RowBox[{"claim", ".", "  ", "This"}], " ", "is", " ", "determined", " ", 
+     "later", " ", "in", " ", "the", " ", 
+     RowBox[{"program", ".", "  ", "Claim"}], " ", "amount", " ", "is", " ", 
+     "LogNormally", " ", "distributed", " ", "with", " ", "parameters", " ", 
+     "u1", " ", "and", " ", "sigma1"}], ",", " ", 
+    RowBox[{"and", " ", "expected", " ", "value", " ", 
+     RowBox[{"$1000", "."}]}]}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"u1", "=", "4"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sigma1", "=", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{
+       RowBox[{"2", "*", 
+        RowBox[{"Log", "[", "1000", "]"}]}], "-", "8"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"type1oneclaim", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ",", 
+      RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+      RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"temp", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+         RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"temp", ",", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{"LogNormalDistribution", "[", 
+             RowBox[{"u1", ",", "sigma1"}], "]"}], "]"}]}], "]"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"type1oneclaim", ",", "temp"}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.72130030788281*^9, 3.721300308900676*^9}, {
+  3.721300382342742*^9, 3.7213005681468077`*^9}, {3.72130061299866*^9, 
+  3.7213006160720253`*^9}, {3.721300647476112*^9, 3.721300656280579*^9}, {
+  3.721307201368691*^9, 3.7213072076602507`*^9}, {3.7213455318857527`*^9, 
+  3.721345793301921*^9}, {3.721775214498588*^9, 3.721775215480094*^9}, {
+  3.7217752591313343`*^9, 3.721775260151101*^9}},
+ ExpressionUUID -> "9d99303b-d546-46f3-96fd-f127c9b9cc76"],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{"Total", " ", "amount", " ", 
+   RowBox[{"(", 
+    RowBox[{"in", " ", "cash"}], ")"}], " ", "of", " ", "claims", " ", "made",
+    " ", "by", " ", "type", " ", "1", " ", "if", " ", "two", " ", "claims", 
+   " ", "are", " ", 
+   RowBox[{"made", "."}]}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.721345803424876*^9, 3.721345821642099*^9}},
+ ExpressionUUID -> "8bd7c97b-305d-4609-96f8-02e31171b64d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"type1twoclaims", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"k", "=", "1"}], ",", 
+    RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+    RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"temp", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+       RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"temp", ",", 
+         RowBox[{
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u1", ",", "sigma1"}], "]"}], "]"}], "+", 
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u1", ",", "sigma1"}], "]"}], "]"}]}]}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"type1twoclaims", ",", "temp"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.721300706948078*^9, 3.721300776022531*^9}, {
+  3.721307218049201*^9, 3.721307219657199*^9}, {3.721775223206788*^9, 
+  3.721775223931044*^9}, {3.721775267654944*^9, 3.721775268775774*^9}},
+ ExpressionUUID -> "3c886adb-9481-47b7-924e-80b66949a3c1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"sim", " ", "for", " ", "type2oneclaim"}], ",", " ", "twoclaims", 
+    ",", " ", "threeclaims"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"type2oneclaim", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ",", 
+      RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+      RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"temp", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+         RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"temp", ",", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{"LogNormalDistribution", "[", 
+             RowBox[{"u1", ",", "sigma1"}], "]"}], "]"}]}], "]"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"type2oneclaim", ",", "temp"}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.721300600762488*^9, 3.7213006012349653`*^9}, {
+  3.7213009336593227`*^9, 3.721301023748865*^9}, {3.721345831545041*^9, 
+  3.721345846734495*^9}, {3.721775229250786*^9, 3.721775229699801*^9}, {
+  3.721775273845333*^9, 3.7217752753196583`*^9}},
+ ExpressionUUID -> "6c48b560-3914-4ad0-9659-09ba06b65da1"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"type2twoclaims", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"k", "=", "1"}], ",", 
+    RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+    RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"temp", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+       RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"temp", ",", 
+         RowBox[{
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u1", ",", "sigma1"}], "]"}], "]"}], "+", 
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u1", ",", "sigma1"}], "]"}], "]"}]}]}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"type2twoclaims", ",", "temp"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.721301072089973*^9, 3.721301180520587*^9}, {
+  3.721775234587617*^9, 3.72177523499471*^9}, {3.721775278319695*^9, 
+  3.721775279257406*^9}},
+ ExpressionUUID -> "5b7325d9-ad19-4198-b918-f555dd906647"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"type2threeclaims", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"k", "=", "1"}], ",", 
+    RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+    RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"temp", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+       RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"temp", ",", 
+         RowBox[{
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u1", ",", "sigma1"}], "]"}], "]"}], "+", 
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u1", ",", "sigma1"}], "]"}], "]"}], "+", 
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u1", ",", "sigma1"}], "]"}], "]"}]}]}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"type2threeclaims", ",", "temp"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.721301236120438*^9, 3.721301348701849*^9}, {
+  3.72177524002135*^9, 3.721775240423622*^9}, {3.7217752820370626`*^9, 
+  3.721775282971409*^9}},
+ ExpressionUUID -> "8245d175-1106-4727-91e8-4f091a90a711"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "parameters", " ", "for", " ", "lognormal", " ", "distribution", " ", 
+    "used", " ", "for", " ", "claim", " ", "amount", " ", "for", " ", "Type", 
+    " ", "3", " ", "subscriber"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"u2", "=", "5"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sigma2", "=", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{
+       RowBox[{"2", "*", 
+        RowBox[{"Log", "[", "1500", "]"}]}], "-", "10"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"type3oneclaim", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ",", 
+      RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+      RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"temp", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+         RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"temp", ",", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{"LogNormalDistribution", "[", 
+             RowBox[{"u2", ",", "sigma2"}], "]"}], "]"}]}], "]"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"type3oneclaim", ",", "temp"}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.7213015209910917`*^9, 3.721301591508003*^9}, {
+  3.721345854552217*^9, 3.721345881184972*^9}},
+ ExpressionUUID -> "a65a777a-3135-4bb1-bca8-fe46590ff93d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"type3twoclaims", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"k", "=", "1"}], ",", 
+    RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+    RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"temp", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+       RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"temp", ",", 
+         RowBox[{
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u2", ",", "sigma2"}], "]"}], "]"}], "+", 
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u2", ",", "sigma2"}], "]"}], "]"}]}]}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"type3twoclaims", ",", "temp"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.721301628047511*^9, 3.721301711466097*^9}},
+ ExpressionUUID -> "eed2c117-2817-4458-95e7-30c5c013d238"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"type3threeclaims", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"k", "=", "1"}], ",", 
+    RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+    RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"temp", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+       RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"temp", ",", 
+         RowBox[{
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u2", ",", "sigma2"}], "]"}], "]"}], "+", 
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u2", ",", "sigma2"}], "]"}], "]"}], "+", 
+          RowBox[{"RandomVariate", "[", 
+           RowBox[{"LogNormalDistribution", "[", 
+            RowBox[{"u2", ",", "sigma2"}], "]"}], "]"}]}]}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"type3threeclaims", ",", "temp"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.721301772367175*^9, 3.721301855550282*^9}},
+ ExpressionUUID -> "4688836d-1279-4202-af27-999afbfb5869"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"For", " ", "Type", " ", "1"}], ",", " ", 
+    RowBox[{
+    "multinomial", " ", "distribution", " ", "determines", " ", "whether", 
+     " ", "0"}], ",", " ", 
+    RowBox[{"1", " ", "or", " ", "2", " ", "claims", " ", "are", " ", 
+     RowBox[{"made", ".", "  ", "We"}], " ", "store", " ", "randomly", " ", 
+     "generated", " ", "values", " ", 
+     RowBox[{"(", 
+      RowBox[{"they", " ", "are", " ", "vectors", " ", "of", " ", 
+       RowBox[{"0", "'"}], "s", " ", "and", " ", 
+       RowBox[{"1", "'"}], "s"}], ")"}], " ", "in", " ", "res"}], ",", " ", 
+    RowBox[{
+    "and", " ", "then", " ", "replace", " ", "the", " ", "vector", " ", 
+     "with", " ", "whatever", " ", "number", " ", "of", " ", "claims", " ", 
+     "it", " ", "corresponds", " ", "to", " ", "using", " ", "If", " ", 
+     RowBox[{"statements", ".", "  ", "For"}], " ", "instance"}], ",", " ", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "0"}], "}"}], " ", "means", " ", "0", " ", 
+     "claims", " ", "made"}], ",", " ", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "0"}], "}"}], " ", "exactly", " ", "1", " ",
+      "claim"}], ",", " ", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "1"}], "}"}], " ", "exactly", " ", "2.", "  ",
+      "If", " ", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "0"}], "}"}], " ", "is", " ", "generated", 
+     " ", "and", " ", "stored", " ", "in", " ", "res"}], ",", " ", 
+    RowBox[{
+    "the", " ", "If", " ", "statement", " ", "translates", " ", "this", " ", 
+     "into", " ", "a", " ", "1", " ", 
+     RowBox[{"(", 
+      RowBox[{"for", " ", "1", " ", "claim"}], ")"}], " ", "and", " ", 
+     "stores", " ", "it", " ", "to", " ", "temp"}], ",", " ", 
+    RowBox[{
+    "which", " ", "is", " ", "then", " ", "stored", " ", "to", " ", 
+     "type1numberof", " ", 
+     RowBox[{"claims", ".", "  ", "These"}], " ", "values", " ", "are", " ", 
+     "only", " ", "used", " ", "if", " ", 
+     RowBox[{
+      RowBox[{"subscribertype", "[", 
+       RowBox[{"[", "k", "]"}], "]"}], "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", "is", " ", "Type", " ", "1.", "  ",
+      "Sim", " ", "for", " ", "Type", " ", "2", " ", "and", " ", "Type", " ", 
+     "3."}]}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"type1numberofclaims", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ",", 
+      RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+      RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"temp", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+         RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"res", "=", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{"MultinomialDistribution", "[", 
+             RowBox[{"1", ",", 
+              RowBox[{"{", 
+               RowBox[{".50", ",", ".40", ",", ".10"}], "}"}]}], "]"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"res", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"temp", ",", "0"}], "]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"res", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"temp", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"temp", ",", "2"}], "]"}]}], "\[IndentingNewLine]", 
+              "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"type1numberofclaims", ",", "temp"}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.721302906032557*^9, 3.721302920637764*^9}, {
+   3.7213029737611723`*^9, 3.721302977374076*^9}, {3.721303120892528*^9, 
+   3.721303132571785*^9}, {3.721303211371085*^9, 3.721303399918549*^9}, 
+   3.72130343364002*^9, {3.721303863562698*^9, 3.721303956625667*^9}, {
+   3.721345911719844*^9, 3.721346315771057*^9}, {3.72134635139167*^9, 
+   3.72134635779529*^9}, {3.721409238900207*^9, 3.7214093749264107`*^9}, {
+   3.72140941749625*^9, 3.721409436008314*^9}, {3.721774080685564*^9, 
+   3.721774342394174*^9}},
+ ExpressionUUID -> "c7341eee-b0e6-46c5-ad58-2b4f8ff96dd3"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"type2numberofclaims", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"k", "=", "1"}], ",", 
+    RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+    RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"temp", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+       RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"res", "=", 
+         RowBox[{"RandomVariate", "[", 
+          RowBox[{"MultinomialDistribution", "[", 
+           RowBox[{"1", ",", 
+            RowBox[{"{", 
+             RowBox[{".35", ",", ".30", ",", ".20", ",", ".15"}], "}"}]}], 
+           "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"res", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"temp", ",", "0"}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"res", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"temp", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"res", "[", 
+                  RowBox[{"[", "3", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"AppendTo", "[", 
+                 RowBox[{"temp", ",", "2"}], "]"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"AppendTo", "[", 
+                 RowBox[{"temp", ",", "3"}], "]"}]}], "\[IndentingNewLine]", 
+               "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+         "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"type2numberofclaims", ",", "temp"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.721304748542966*^9, 3.721304822707015*^9}, {
+  3.7214094577636957`*^9, 3.721409581425425*^9}},
+ ExpressionUUID -> "162c8df4-16ac-4435-8619-b1b3a5ab0c45"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.721305100991415*^9, 3.721305268482036*^9}, {
+   3.72140944709744*^9, 3.721409452161291*^9}, 3.721774376973641*^9},
+ ExpressionUUID -> "5c6998b2-fcd0-4f01-b2df-9ee76c4cac18"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"type3numberofclaims", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"k", "=", "1"}], ",", 
+    RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+    RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"temp", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+       RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"res", "=", 
+         RowBox[{"RandomVariate", "[", 
+          RowBox[{"MultinomialDistribution", "[", 
+           RowBox[{"1", ",", 
+            RowBox[{"{", 
+             RowBox[{".10", ",", ".20", ",", ".30", ",", ".40"}], "}"}]}], 
+           "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"res", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"temp", ",", "0"}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"res", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"temp", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"res", "[", 
+                  RowBox[{"[", "3", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"AppendTo", "[", 
+                 RowBox[{"temp", ",", "2"}], "]"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"AppendTo", "[", 
+                 RowBox[{"temp", ",", "3"}], "]"}]}], "\[IndentingNewLine]", 
+               "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+         "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"type3numberofclaims", ",", "temp"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.721305325825923*^9, 3.721305386587803*^9}, {
+  3.721409630181108*^9, 3.721409723745981*^9}},
+ ExpressionUUID -> "6fc70b8f-95d0-4d02-8ea6-3d7455cbf929"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7213054376345882`*^9, 3.7213054514692783`*^9}, {
+   3.721409617232432*^9, 3.721409623530834*^9}, 3.721774388424789*^9},
+ ExpressionUUID -> "04e2ba59-478e-4b10-9682-d90c56e1365d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "Consolidating", " ", "all", " ", "claim", " ", "amounts", " ", "of", " ",
+      "Type", " ", "1", " ", 
+     RowBox[{"subscribers", ".", "  ", "Works"}], " ", "as", " ", "follows"}],
+     ",", " ", 
+    RowBox[{"if", " ", 
+     RowBox[{
+      RowBox[{"subscribertype", "[", 
+       RowBox[{"[", "k", "]"}], "]"}], "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", "is", " ", "of", " ", "Type", " ", 
+     "1"}], ",", " ", 
+    RowBox[{"accesses", " ", 
+     RowBox[{
+      RowBox[{"type1numberofclaims", "[", 
+       RowBox[{"[", "k", "]"}], "]"}], "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", "and", " ", "determines", " ", 
+     "number", " ", "of", " ", 
+     RowBox[{"claims", ".", "  ", "Depending"}], " ", "on", " ", "number", 
+     " ", "of", " ", "claims", " ", "made"}], ",", " ", 
+    RowBox[{"accesses", " ", 
+     RowBox[{
+      RowBox[{"type1oneclaim", "[", 
+       RowBox[{"[", "k", "]"}], "]"}], "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", "or", " ", 
+     RowBox[{
+      RowBox[{"typeonetwoclaim", "[", 
+       RowBox[{"[", "k", "]"}], "]"}], "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", "and", " ", "appends", " ", 
+     "claim", " ", "amount", " ", "to", " ", "temp", " ", "and", " ", "then", 
+     " ", "temp", " ", "appended", " ", "to", " ", 
+     RowBox[{"claimstype1", ".", " ", "If"}], " ", "no", " ", "claims", " ", 
+     "made"}], ",", " ", 
+    RowBox[{"appends", " ", "0.", " ", "So"}], ",", " ", 
+    RowBox[{"for", " ", "instance"}], ",", " ", 
+    RowBox[{
+    "the", " ", "50", "th", " ", "entry", " ", "of", " ", "claimstype1", " ", 
+     "corresponds", " ", "to", " ", "the", " ", "50", "th", " ", 
+     "simulation"}], ",", " ", 
+    RowBox[{
+    "and", " ", "each", " ", "of", " ", "the", " ", "entries", " ", "in", " ", 
+     RowBox[{"claimstype1", "[", 
+      RowBox[{"[", "50", "]"}], "]"}], " ", "is", " ", "the", " ", "total", 
+     " ", "amount", " ", "claimed", " ", "by", " ", "a", " ", "Type", " ", 
+     "1", " ", "subscriber", " ", "in", " ", "the", " ", "50", "th", " ", 
+     RowBox[{"simulation", ".", " ", "Sim"}], " ", "for", " ", "Type", " ", 
+     "2", " ", "and", " ", "Type", " ", "3"}]}], "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"claimstype1", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ",", 
+      RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+      RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"temp", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+         RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"subscribertype", "[", 
+               RowBox[{"[", "k", "]"}], "]"}], "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"type1numberofclaims", "[", 
+                  RowBox[{"[", "k", "]"}], "]"}], "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "0"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"temp", ",", "0"}], "]"}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"type1numberofclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"AppendTo", "[", 
+                   RowBox[{"temp", ",", 
+                    RowBox[{
+                    RowBox[{"type1oneclaim", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"type1numberofclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "2"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"AppendTo", "[", 
+                    RowBox[{"temp", ",", 
+                    RowBox[{
+                    RowBox[{"type1twoclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "]"}], ";"}]}], 
+                 "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]",
+               "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"claimstype1", ",", "temp"}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.721307434699401*^9, 3.721307504335042*^9}, {
+   3.72130753533051*^9, 3.7213078275710707`*^9}, {3.721307865292164*^9, 
+   3.721307905251586*^9}, {3.721307963763527*^9, 3.721308054173015*^9}, {
+   3.721308089140176*^9, 3.721308163498014*^9}, 3.721308195132*^9, {
+   3.7213082406174192`*^9, 3.721308328941934*^9}, {3.721308406672608*^9, 
+   3.721308411704784*^9}, {3.721346650072722*^9, 3.721346963607791*^9}, {
+   3.72134701069385*^9, 3.7213470820635557`*^9}},
+ ExpressionUUID -> "b7e6fcaf-ca12-49fa-b9a6-7434474a08f8"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"claimstype2", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"k", "=", "1"}], ",", 
+    RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+    RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"temp", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+       RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"subscribertype", "[", 
+             RowBox[{"[", "k", "]"}], "]"}], "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "2"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"type2numberofclaims", "[", 
+                RowBox[{"[", "k", "]"}], "]"}], "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "0"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"temp", ",", "0"}], "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"type2numberofclaims", "[", 
+                   RowBox[{"[", "k", "]"}], "]"}], "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"AppendTo", "[", 
+                 RowBox[{"temp", ",", 
+                  RowBox[{
+                   RowBox[{"type2oneclaim", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                   RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"type2numberofclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "2"}], ",", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"AppendTo", "[", 
+                    RowBox[{"temp", ",", 
+                    RowBox[{
+                    RowBox[{"type2twoclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"type2numberofclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "3"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"AppendTo", "[", 
+                    RowBox[{"temp", ",", 
+                    RowBox[{
+                    RowBox[{"type2threeclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "]"}], ";"}]}], 
+                  "\[IndentingNewLine]", "]"}], ";"}]}], 
+               "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+            "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"claimstype2", ",", "temp"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.721308430389484*^9, 3.721308651663856*^9}},
+ ExpressionUUID -> "a617931b-7e40-4763-ba43-eb6b4fb6ba27"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"claimstype3", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"k", "=", "1"}], ",", 
+    RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+    RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"temp", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", "1000"}], ",", 
+       RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"subscribertype", "[", 
+             RowBox[{"[", "k", "]"}], "]"}], "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "3"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"type3numberofclaims", "[", 
+                RowBox[{"[", "k", "]"}], "]"}], "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "0"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"temp", ",", "0"}], "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"type3numberofclaims", "[", 
+                   RowBox[{"[", "k", "]"}], "]"}], "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"AppendTo", "[", 
+                 RowBox[{"temp", ",", 
+                  RowBox[{
+                   RowBox[{"type3oneclaim", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                   RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"type3numberofclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "2"}], ",", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"AppendTo", "[", 
+                    RowBox[{"temp", ",", 
+                    RowBox[{
+                    RowBox[{"type3twoclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"type3numberofclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "3"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"AppendTo", "[", 
+                    RowBox[{"temp", ",", 
+                    RowBox[{
+                    RowBox[{"type3threeclaims", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "]"}], ";"}]}], 
+                  "\[IndentingNewLine]", "]"}], ";"}]}], 
+               "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+            "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"claimstype3", ",", "temp"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.721308670219657*^9, 3.721308695158061*^9}, {
+  3.721316707452832*^9, 3.72131670766628*^9}},
+ ExpressionUUID -> "710f04cf-e602-426f-af59-79f41be0f79d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"consolidates", " ", "claimstype1"}], ",", " ", "claimstype2", 
+    ",", " ", 
+    RowBox[{
+     RowBox[{"claimstype3", ".", "  ", "So"}], " ", "now"}], ",", " ", 
+    RowBox[{
+    "the", " ", "kth", " ", "entry", " ", "of", " ", "claimsvec", " ", 
+     "corresponds", " ", "to", " ", "a", " ", "list", " ", "consisting", " ", 
+     "of", " ", "all", " ", "claims", " ", "made", " ", "during", " ", "kth", 
+     " ", 
+     RowBox[{"simulation", ".", "  ", "Since"}], " ", "there", " ", "are", 
+     " ", "1000", " ", "subscribers", " ", "per", " ", "simulation"}], ",", 
+    " ", 
+    RowBox[{
+     RowBox[{"we", " ", "expect", " ", 
+      RowBox[{"Length", "[", 
+       RowBox[{"claimsvec", "[", 
+        RowBox[{"[", "k", "]"}], "]"}], "]"}]}], "=", 
+     RowBox[{"1000", " ", 
+      RowBox[{"(", 
+       RowBox[{
+       "since", " ", "we", " ", "append", " ", "zeros", " ", "for", " ", "no",
+         " ", "claim"}], ")"}]}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"claimsvec", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ",", 
+      RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+      RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"claimsvec", ",", 
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"claimstype1", "[", 
+           RowBox[{"[", "k", "]"}], "]"}], ",", 
+          RowBox[{"claimstype2", "[", 
+           RowBox[{"[", "k", "]"}], "]"}], ",", 
+          RowBox[{"claimstype3", "[", 
+           RowBox[{"[", "k", "]"}], "]"}]}], "]"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.72131672884514*^9, 3.721316896436658*^9}, {
+  3.721316974997267*^9, 3.7213170738300133`*^9}, {3.721347092836429*^9, 
+  3.721347259078025*^9}},
+ ExpressionUUID -> "09a50a43-be2b-4c1e-8aad-79bc7d5d12b0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"totals", " ", "are", " ", "now", " ", "summed"}], ",", " ", 
+    RowBox[{
+    "so", " ", "we", " ", "have", " ", "a", " ", "list", " ", "of", " ", 
+     "500", " ", "entries"}], ",", " ", 
+    RowBox[{"each", " ", "entry", " ", "is", " ", "a", " ", "number"}], ",", 
+    " ", 
+    RowBox[{
+    "the", " ", "dollar", " ", "sum", " ", "of", " ", "all", " ", "claims", 
+     " ", "made", " ", "during", " ", "kth", " ", "simulation"}]}], " ", 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"claimtotals", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ",", 
+      RowBox[{"k", "\[LessEqual]", "500"}], ",", 
+      RowBox[{"++", "k"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"claimtotals", ",", 
+        RowBox[{"Total", "[", 
+         RowBox[{"claimsvec", "[", 
+          RowBox[{"[", "k", "]"}], "]"}], "]"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.721317197302723*^9, 3.721317222221554*^9}, {
+   3.721317267448599*^9, 3.721317314724571*^9}, 3.721317352107728*^9, {
+   3.721317905589713*^9, 3.72131802967945*^9}, {3.721318280960504*^9, 
+   3.721318383207273*^9}, {3.7213186070414677`*^9, 3.721318614887476*^9}, {
+   3.721347270617723*^9, 3.7213473159458437`*^9}},
+ ExpressionUUID -> "ae2b46f4-d697-4185-80df-fb121654cb78"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"p100", "=", 
+    RowBox[{"100", "*", "12"}]}], ";"}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p200", "=", 
+   RowBox[{"200", "*", "12"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p300", "=", 
+   RowBox[{"300", "*", "12"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p400", "=", 
+   RowBox[{"400", "*", "12"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p500", "=", 
+   RowBox[{"500", "*", "12"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p600", "=", 
+   RowBox[{"600", "*", "12"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"premiumvec", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "p100", ",", "p200", ",", "p300", ",", "p400", ",", "p500", ",", "p600"}],
+     "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"expectedvalue", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"stddev", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"worstcase", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+     "Profit", " ", "for", " ", "the", " ", "kth", " ", "simulation", " ", 
+      "is", " ", "the", " ", "total", " ", "premium", " ", "collected", " ", 
+      "minus", " ", "the", " ", "total", " ", "claims", " ", 
+      RowBox[{"paid", ".", "  ", "\[IndentingNewLine]", 
+       RowBox[{"premiumvec", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}]}], "-", 
+     RowBox[{
+     "claimtotals", " ", "is", " ", "a", " ", "vector", " ", "of", " ", "500",
+       " ", "entries", " ", "corresponding", " ", "to", " ", "the", " ", 
+      "profit", " ", "made", " ", "during", " ", "the", " ", "kth", " ", 
+      RowBox[{"simulation", ".", "  ", "We"}], " ", "want", " ", "the", " ", 
+      "expected", " ", "value", " ", "of", " ", "the", " ", "profit"}]}], ",",
+     " ", 
+    RowBox[{
+    "which", " ", "we", " ", "can", " ", "get", " ", "by", " ", "summing", 
+     " ", "up", " ", "the", " ", "profit", " ", "entries", " ", "and", " ", 
+     "dividing", " ", "by", " ", "500.", "  ", "We", " ", "use", " ", "the", 
+     " ", "built", " ", "in", " ", "Mean", " ", "function", " ", "to", " ", 
+     "do", " ", "this"}], ",", " ", 
+    RowBox[{
+     RowBox[{
+     "and", " ", "also", " ", "Standard", " ", "Deviation", " ", "to", " ", 
+      "get", " ", "a", " ", "spread", " ", "on", " ", "the", " ", 
+      RowBox[{"data", ".", "  ", "Worst"}], " ", "Case", " ", "is", " ", 
+      "the", " ", "expected", " ", "value"}], " ", "-", " ", 
+     RowBox[{"3", " ", "times", " ", "the", " ", "Standard", " ", 
+      RowBox[{"Deviation", ".", "  ", "We"}], " ", "look", " ", "at", " ", 
+      "a", " ", "range", " ", "of", " ", "premium", " ", "prices", " ", "and",
+       " ", "determine", " ", "the", " ", "first", " ", "one", " ", "that", 
+      " ", "gives", " ", "us", " ", "a", " ", "positive", " ", "dollar", " ", 
+      "amount", " ", "in", " ", "the", " ", "Worst", " ", "Case", " ", 
+      RowBox[{"scenario", "."}]}]}]}], " ", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.721318671861041*^9, 3.721318718321752*^9}, {
+  3.7213189182158546`*^9, 3.721318920419935*^9}, {3.721319199739675*^9, 
+  3.721319220942527*^9}, {3.721319475897541*^9, 3.721319495161273*^9}, {
+  3.721319674158543*^9, 3.721319690774414*^9}, {3.721347433707519*^9, 
+  3.721347586694948*^9}, {3.7213476412700653`*^9, 3.721347646265028*^9}, {
+  3.721347678142264*^9, 3.721347840847653*^9}, {3.721376654314061*^9, 
+  3.721376654513897*^9}, {3.721411290406966*^9, 3.721411345673585*^9}},
+ ExpressionUUID -> "617309fb-d521-434a-b371-6e9b9f1d09be"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", 
+     RowBox[{"Length", "[", "premiumvec", "]"}]}], ",", 
+    RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"expectedvalue", ",", 
+       RowBox[{"Mean", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"premiumvec", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "*", "1000"}], "-", 
+         "claimtotals"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"stddev", ",", 
+       RowBox[{"StandardDeviation", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"premiumvec", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "*", "1000"}], "-", 
+         "claimtotals"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"worstcase", ",", 
+       RowBox[{
+        RowBox[{"expectedvalue", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "-", 
+        RowBox[{"3", "*", 
+         RowBox[{"stddev", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}]}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.721319229380816*^9, 3.721319290927887*^9}, {
+   3.721319330612789*^9, 3.721319345726337*^9}, {3.721319376089254*^9, 
+   3.7213194278414593`*^9}, 3.721319460384089*^9, {3.721319504324452*^9, 
+   3.7213196661941757`*^9}, {3.7213196971085873`*^9, 3.721319699635396*^9}},
+ ExpressionUUID -> "092f37d0-e05b-4144-9b67-fe7e662416c4"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"cases", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", 
+     RowBox[{"Length", "[", "premiumvec", "]"}]}], ",", 
+    RowBox[{"++", "i"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"temp", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"temp", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"premiumvec", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", 
+         RowBox[{"expectedvalue", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", 
+         RowBox[{"stddev", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], ",", 
+         RowBox[{"worstcase", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"cases", ",", "temp"}], "]"}]}]}], "\[IndentingNewLine]", "]"}],
+   ";"}]}], "Input",
+ CellChangeTimes->{{3.7213198335759172`*^9, 3.721319867335853*^9}, {
+  3.721319957764678*^9, 3.7213199777418327`*^9}, {3.721320064306653*^9, 
+  3.7213202796726723`*^9}},
+ ExpressionUUID -> "7aca5595-0961-4eb9-9e93-e137b93c496c"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.721320283771309*^9, 3.721320284619532*^9}, {
+  3.721320321312634*^9, 3.721320330922428*^9}},
+ ExpressionUUID -> "61250d93-25e4-4ca0-a014-65b9878dce7c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"case1", "=", 
+   RowBox[{
+    RowBox[{"cases", "[", 
+     RowBox[{"[", "1", "]"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"case2", "=", 
+   RowBox[{
+    RowBox[{"cases", "[", 
+     RowBox[{"[", "2", "]"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"case3", "=", 
+   RowBox[{
+    RowBox[{"cases", "[", 
+     RowBox[{"[", "3", "]"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"case4", "=", 
+   RowBox[{
+    RowBox[{"cases", "[", 
+     RowBox[{"[", "4", "]"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"case5", "=", 
+   RowBox[{
+    RowBox[{"cases", "[", 
+     RowBox[{"[", "5", "]"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"case6", "=", 
+   RowBox[{
+    RowBox[{"cases", "[", 
+     RowBox[{"[", "6", "]"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7213205770116863`*^9, 3.72132065065416*^9}},
+ ExpressionUUID -> "70745480-3df6-4e12-817f-0014dd882427"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<Premium\>\"", ",", "\"\<Expected Value\>\"", ",", 
+       "\"\<Standard Deviation\>\"", ",", "\"\<Worst Case\>\""}], "}"}], ",", 
+     "case1", ",", "case2", ",", "case3", ",", "case4", ",", "case5", ",", 
+     "case6"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Grid", "[", "data", "]"}]}], "Input",
+ CellChangeTimes->{{3.7213206540775146`*^9, 3.72132071417161*^9}},
+ ExpressionUUID -> "09d5eb44-e78a-4081-965d-68e67ca5223d"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Premium\"\>", "\<\"Expected Value\"\>", "\<\"Standard \
+Deviation\"\>", "\<\"Worst Case\"\>"},
+    {"1200", "208554.36267162825`", "361435.14129820705`", 
+     RowBox[{"-", "875751.061222993`"}]},
+    {"2400", "1.408554362671628`*^6", "361435.14129820705`", 
+     "324248.9387770067`"},
+    {"3600", "2.6085543626716277`*^6", "361435.14129820705`", 
+     "1.5242489387770065`*^6"},
+    {"4800", "3.8085543626716267`*^6", "361435.14129820705`", 
+     "2.7242489387770053`*^6"},
+    {"6000", "5.008554362671628`*^6", "361435.14129820705`", 
+     "3.924248938777006`*^6"},
+    {"7200", "6.208554362671632`*^6", "361435.14129820705`", 
+     "5.124248938777011`*^6"}
+   },
+   AutoDelete->False,
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{{3.721320704562619*^9, 3.721320714431109*^9}, 
+   3.721411151425652*^9, 3.721411372796255*^9},
+ ExpressionUUID -> "da7c2a7a-cc8c-4cab-9d22-e197037e7a00"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Print", "[", 
+  "\"\<A monthly premium of $200 protects the insurance company against risk.\
+\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.721411394440042*^9, 3.7214114331927347`*^9}}],
+
+Cell[BoxData["\<\"A monthly premium of $200 protects the insurance company \
+against risk.\"\>"], "Print",
+ CellChangeTimes->{3.721411442060708*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7213198526369953`*^9, 3.721319857196817*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "References", "\[IndentingNewLine]", "\[IndentingNewLine]", "Broverman"}],
+     ",", " ", 
+    RowBox[{
+     RowBox[{"S", ".", "   ", "ACTEX"}], " ", "Exam", " ", "P", " ", "Study", 
+     " ", "Manual", "\[IndentingNewLine]", "\[IndentingNewLine]", "Collins", 
+     " ", 
+     RowBox[{"R", "."}]}], ",", "     ", 
+    RowBox[{
+    "Actuarial", " ", "Application", " ", "of", " ", "the", " ", "Monte", " ",
+      "Carlo", " ", "Technique", "\[IndentingNewLine]", "\[IndentingNewLine]",
+      "Conrad"}], ",", " ", 
+    RowBox[{"A", "."}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"https", ":"}], "//", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"www", ".", "slideshare", ".", "net"}], "/", "AdamConrad2"}], 
+       "/", "actuarial"}], "-", "application", "-", "of", "-", "monte", "-", 
+      "carlo", "-", "simulation", "-", "46703744"}]}]}], " ", "*)"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.721774815894363*^9, 3.721774977708889*^9}, {
+  3.7217750339873743`*^9, 3.7217750693855743`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7213188182769403`*^9, 3.721318902065366*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.721316811046321*^9, 3.7213168110537977`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.721316720109234*^9, 3.7213167209737873`*^9}}]
+},
+WindowSize->{808, 603},
+WindowMargins->{{85, Automatic}, {21, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
+21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 4901, 116, 579, "Input"],
+Cell[5462, 138, 3066, 68, 390, "Input"],
+Cell[8531, 208, 444, 9, 32, "Input"],
+Cell[8978, 219, 1453, 34, 201, "Input"],
+Cell[10434, 255, 1575, 37, 201, "Input"],
+Cell[12012, 294, 1406, 34, 201, "Input"],
+Cell[13421, 330, 1566, 37, 222, "Input"],
+Cell[14990, 369, 1821, 45, 264, "Input"],
+Cell[16814, 416, 1309, 32, 201, "Input"],
+Cell[18126, 450, 1467, 35, 222, "Input"],
+Cell[19596, 487, 5063, 111, 579, "Input"],
+Cell[24662, 600, 2599, 63, 390, "Input"],
+Cell[27264, 665, 222, 3, 32, "Input"],
+Cell[27489, 670, 2620, 63, 411, "Input"],
+Cell[30112, 735, 227, 3, 32, "Input"],
+Cell[30342, 740, 6038, 134, 621, "Input"],
+Cell[36383, 876, 3998, 94, 453, "Input"],
+Cell[40384, 972, 4046, 95, 453, "Input"],
+Cell[44433, 1069, 2018, 50, 180, "Input"],
+Cell[46454, 1121, 1527, 36, 159, "Input"],
+Cell[47984, 1159, 3681, 79, 432, "Input"],
+Cell[51668, 1240, 1552, 38, 117, "Input"],
+Cell[53223, 1280, 1269, 33, 138, "Input"],
+Cell[54495, 1315, 200, 3, 32, "Input"],
+Cell[54698, 1320, 1243, 38, 138, "Input"],
+Cell[CellGroupData[{
+Cell[55966, 1362, 559, 13, 75, "Input"],
+Cell[56528, 1377, 1002, 22, 147, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[57567, 1404, 208, 4, 32, "Input"],
+Cell[57778, 1410, 148, 2, 24, "Print"]
+}, Open  ]],
+Cell[57941, 1415, 94, 1, 32, "Input"],
+Cell[58038, 1418, 1119, 27, 222, "Input"],
+Cell[59160, 1447, 94, 1, 32, "Input"],
+Cell[59257, 1450, 94, 1, 32, "Input"],
+Cell[59354, 1453, 94, 1, 32, "Input"]
+}
+]
+*)
+
